@@ -43,7 +43,7 @@ typedef struct s_info
 
 typedef struct s_data
 {
-	s_info	*info;
+	t_info	*info;
 }			t_data;
 
 ////////////////////get_next_line.c////////////////////

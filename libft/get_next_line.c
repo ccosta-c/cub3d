@@ -6,11 +6,11 @@
 /*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 15:30:14 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/11/13 12:55:19 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2022/12/15 11:40:10 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/lib.h"
+#include "libft.h"
 
 static char	*ft_read_dirty_line(char *stash, int fd)
 {

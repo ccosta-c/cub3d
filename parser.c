@@ -26,7 +26,7 @@ int	parser(t_data *data, char *path)
 	return (0);
 }
 
-int	get_textures(t_data *data, int fd)
+/*int	get_textures(t_data *data, int fd)
 {
 	char	*line;
 
@@ -38,7 +38,7 @@ int	get_textures(t_data *data, int fd)
 			break ;
 		check_textures(line);
 	}
-}
+}*/
 
 void	check_textures(char *line)
 {
@@ -46,5 +46,5 @@ void	check_textures(char *line)
 
 	i = 0;
 	if (strncmp("NO", line, 2) == 0)
-		
+		;
 }

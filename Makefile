@@ -38,8 +38,7 @@ SRCS_BONUS	= bonus
 LIBX 		= minilibx-linux
 
 #_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_ FILES _/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_
-SRC				=	parser.c \
-					get_next_line.c
+SRC				=	parser.c
 OBJS 			:=	$(SRC:.c=.o)
 NAME			= cub3D
 TARGET			= $(addprefix $(SRCS)/, $(OBJS))
