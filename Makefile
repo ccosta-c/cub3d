@@ -29,7 +29,7 @@ AR = ar -rcs
 #_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_ FLAGS _/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_
 CFLAGS		= -Wall -Wextra -Werror -g
 MKFLAGS		= --no-print-directory
-LIBXFLAGS	= -L ./mlx -lmlx -Ilmlx -lXext -lX11 -lm
+LIBXFLAGS	= -L ./minilibx-linux -Ilmlx -lXext -lX11 -lm
 
 #_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_ FOLDERS _/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_
 DEPS		= includes
@@ -38,7 +38,7 @@ SRCS_BONUS	= bonus
 LIBX 		= minilibx-linux
 
 #_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_ FILES _/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_
-SRC				=	main.c
+SRC				=	parser.c
 OBJS 			:=	$(SRC:.c=.o)
 NAME			= cub3D
 TARGET			= $(addprefix $(SRCS)/, $(OBJS))
@@ -50,7 +50,7 @@ all: $(NAME)
 
 $(NAME): $(TARGET)
 
-	$(CC) $(CFLAGS) main.c $(TARGET) -o $(NAME)
+	$(CC) $(CFLAGS) main.c $(TARGET) $(LIBXFLAGS) -o $(NAME) -I $(DEPS)
 
 	echo "$(GREEN)  _____                   _ ";
 	echo " |  __ \                 | |";
@@ -64,12 +64,10 @@ $(NAME): $(TARGET)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	make clean $(MKFLAGS) -sC
 	echo "[$(RED) Deleted $(RESET)] $(GREEN)*/*.o$(RESET)"
 	$(RM) $(TARGET) $(TARGET_BONUS)
 
 fclean: clean
-	make fclean $(MKFLAGS) -sC
 	echo "[$(RED) Deleted $(RESET)] $(GREEN)$(NAME)$(RESET)"
 	$(RM) $(NAME)
 	$(RM) $(NAME_BONUS)
