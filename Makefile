@@ -30,17 +30,22 @@ AR = ar -rcs
 CFLAGS		= -Wall -Wextra -Werror -g
 MKFLAGS		= --no-print-directory
 LIBXFLAGS	= -L ./minilibx-linux -Ilmlx -lXext -lX11 -lm
+LIBFTFLAGS	= -L ./libft -lft
 
 #_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_ FOLDERS _/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_
 DEPS		= includes
 SRCS		= .
 SRCS_BONUS	= bonus
+LIBFT		= libft
 LIBX 		= minilibx-linux
 
 #_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_ FILES _/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_
-SRC				=	parser.c
-OBJS 			:=	$(SRC:.c=.o)
+SRC				= parser.c
+OBJS 			:= $(SRC:.c=.o)
+BONUS			=
+OBJS_BONUS		:= $(BONUS:.c=.o)
 NAME			= cub3D
+NAME_BONUS		= cub3D
 TARGET			= $(addprefix $(SRCS)/, $(OBJS))
 TARGET_BONUS	= $(addprefix $(SRCS_BONUS)/, $(OBJS_BONUS))
 
@@ -49,29 +54,43 @@ TARGET_BONUS	= $(addprefix $(SRCS_BONUS)/, $(OBJS_BONUS))
 all: $(NAME)
 
 $(NAME): $(TARGET)
+	echo "[$(CYAN)Compiling$(RESET)] $(CFLAGS) $(GREEN)libft/*$(RESET)"
+	make $(MKFLAGS) -C $(LIBFT)
+	echo "[$(CYAN)Compiling$(RESET)] $(CFLAGS) $(GREEN)minilibx-linux/*$(RESET)"
+	make all $(MKFLAGS) -sC $(LIBX)
 
-	$(CC) $(CFLAGS) main.c $(TARGET) $(LIBXFLAGS) -o $(NAME) -I $(DEPS)
+	$(CC) $(CFLAGS) main.c $(TARGET) $(LIBFTFLAGS) $(LIBXFLAGS) -o $(NAME)
 
-	echo "$(GREEN)  _____                   _ ";
-	echo " |  __ \                 | |";
-	echo " | |  | | ___  _ __   ___| |";
-	echo " | |  | |/ _ \| '_ \ / _ \ |";
-	echo " | |__| | (_) | | | |  __/_|";
-	echo " |_____/ \___/|_| |_|\___(_)";
+	echo "$(GREEN)Done.$(RESET)"
 
 %.o : %.c
 	echo "[$(CYAN)Compiling$(RESET)] $(CFLAGS) $(GREEN)$<$(RESET)"
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
+	make clean $(MKFLAGS) -C $(LIBFT)
+	echo "[$(RED) Deleted $(RESET)] $(GREEN)libft/*.o$(RESET)"
+	make clean $(MKFLAGS) -C $(LIBX)
+	echo "[$(RED) Deleted $(RESET)] $(GREEN)minilibx-linux/*.o$(RESET)"
 	echo "[$(RED) Deleted $(RESET)] $(GREEN)*/*.o$(RESET)"
 	$(RM) $(TARGET) $(TARGET_BONUS)
 
 fclean: clean
+	make fclean $(MKFLAGS) -C $(LIBFT)
 	echo "[$(RED) Deleted $(RESET)] $(GREEN)$(NAME)$(RESET)"
 	$(RM) $(NAME)
 	$(RM) $(NAME_BONUS)
 
-re: fclean all
+bonus: $(TARGET_BONUS)
+	echo "[$(CYAN)Compiling$(RESET)] $(CFLAGS) $(GREEN)libft/*$(RESET)"
+	make $(MKFLAGS) -C $(LIBFT)
+	echo "[$(CYAN)Compiling$(RESET)] $(CFLAGS) $(GREEN)minilibx-linux/*$(RESET)"
+	make $(MKFLAGS) -sC $(LIBX)
+	$(CC) $(CFLAGS) bonus/main.c $(TARGET_BONUS) $(LIBFTFLAGS) $(LIBXFLAGS) -o $(NAME_BONUS) -I $(DEPS)
+	echo "$(GREEN)Done.$(RESET)"
+
+debug:
+	$(CC) $(CFLAGS) $(LIBXFLAGS) main.c $(SRC) libft/libft.a minilibx-linux/libmlx.a -g
 
 .SILENT:
+re: fclean all

@@ -6,7 +6,7 @@
 /*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 15:07:09 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/09/28 15:31:39 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/11/15 14:45:27 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,5 +144,7 @@ size_t		ft_strlenwithoutn(const char *s);
 int			c_words(const char *s, char c);
 long long	ft_atol(const char *nptr);
 int			ft_zeros(const char *n);
+void		free_array(char **array);
+void		print_array(char **array);
 
 #endif
