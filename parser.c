@@ -38,7 +38,6 @@ void	get_tex_col(t_data *data, int fd)
 		free(line);
 	}
 	check_colors(data);
-
 }
 
 void	get_textures(t_data *data, char *line)
