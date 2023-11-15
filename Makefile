@@ -40,7 +40,12 @@ LIBFT		= libft
 LIBX 		= minilibx-linux
 
 #_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_ FILES _/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_
-SRC				= parser.c
+SRC				=	parser.c \
+					debugging.c \
+					utils.c \
+					frees.c \
+					initialize.c \
+					checks.c
 OBJS 			:= $(SRC:.c=.o)
 BONUS			=
 OBJS_BONUS		:= $(BONUS:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: ccosta-c <ccosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:38:59 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/11/14 15:26:50 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/11/15 18:51:01 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ int	main(int argc, char **argv)
 
 	if (argc == 2)
 	{
-		data = malloc((sizeof (t_data)));
-		data->info = malloc(sizeof (t_info));
-		if (parser(data, argv[1]) == -1)
-			return (-1);
+		check_dot_cub(argv[1]);
+		data = initialize_struct();
+		parser(data, argv[1]);
+		free_exit(data);
 	}
 	else
 	{

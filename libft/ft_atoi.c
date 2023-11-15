@@ -6,7 +6,7 @@
 /*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 12:21:30 by ccosta-c          #+#    #+#             */
-/*   Updated: 2022/12/15 11:39:49 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/11/15 17:51:11 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,18 @@ int	ft_atoi(const char *nptr)
 	int	sign;
 	int	result;
 
-	result = 0;
+	result = -1;
 	sign = ft_whitespace(nptr, &i);
-	while (nptr[i] != '\0' && nptr[i] >= '0' && nptr[i] <= '9')
+	if (nptr[i] != '\0' && nptr[i] >= '0' && nptr[i] <= '9')
 	{
-		result *= 10;
-		result += nptr[i] - 48;
-		i++;
+		result = 0;
+		while (nptr[i] != '\0' && nptr[i] >= '0' && nptr[i] <= '9')
+		{
+			result *= 10;
+			result += nptr[i] - 48;
+			i++;
+		}
+		result *= sign;
 	}
-	result *= sign;
 	return (result);
 }
