@@ -1,8 +1,8 @@
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+        NO                    ./textures/test_n_letter.xpm
+SO ./textures/test_s_letter.xpm
+WE ./textures/test_w_letter.xpm
+EA ./textures/test_e_letter.xpm
 
-X                         	0,0, 255
-C 225,                                  0,0
-X                         	255,255, 255
+F            	255,255, 255a
+C 0,                                  0,0
+

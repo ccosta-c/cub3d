@@ -6,7 +6,7 @@
 /*   By: ccosta-c <ccosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:40:12 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/11/15 19:07:21 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/11/17 13:53:27 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,29 +44,24 @@ void	get_textures(t_data *data, char *line)
 {
 	char	**pp;
 
-	pp = NULL;
-	if (ft_strncmp("NO", line, 2) == 0)
+	pp = ft_split(line, ' ');
+	if (ft_strncmp("NO", pp[0], 2) == 0)
 	{
-		pp = ft_split(line, ' ');
 		data->info->no_tex = ft_strtrim(pp[1], "\n");
 	}
-	if (ft_strncmp("SO", line, 2) == 0)
+	if (ft_strncmp("SO", pp[0], 2) == 0)
 	{
-		pp = ft_split(line, ' ');
 		data->info->so_tex = ft_strtrim(pp[1], "\n");
 	}
-	if (ft_strncmp("WE", line, 2) == 0)
+	if (ft_strncmp("WE", pp[0], 2) == 0)
 	{
-		pp = ft_split(line, ' ');
 		data->info->we_tex = ft_strtrim(pp[1], "\n");
 	}
-	if (ft_strncmp("EA", line, 2) == 0)
+	if (ft_strncmp("EA", pp[0], 2) == 0)
 	{
-		pp = ft_split(line, ' ');
 		data->info->ea_tex = ft_strtrim(pp[1], "\n");
 	}
-	if (pp)
-		free_array(pp);
+	free_array(pp);
 }
 
 void	get_colors(t_data	*data, char *line)
@@ -90,10 +85,33 @@ void	get_colors(t_data	*data, char *line)
 		colors = ft_strtrim(line, "C ");
 		rgb = ft_split(colors, ',');
 		free(colors);
+		check_numeric(rgb, data);
 		data->info->ceiling_r = ft_atoi(rgb[0]);
 		data->info->ceiling_g = ft_atoi(rgb[1]);
 		data->info->ceiling_b = ft_atoi(rgb[2]);
 		data->info->ceiling_rgb = true;
 		free_array(rgb);
+	}
+}
+
+void	check_numeric(char **rgb, t_data *data)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (rgb[i])
+	{
+		while (rgb[i][j])
+		{
+			if (!(ft_isdigit(rgb[i][j])))
+			{
+				free_array(rgb);
+				error_handler(data, -7);
+			}
+			j++;
+		}
+		i++;
 	}
 }

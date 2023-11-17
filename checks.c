@@ -6,7 +6,7 @@
 /*   By: ccosta-c <ccosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 17:43:54 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/11/15 19:09:56 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/11/17 10:11:05 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ void	check_colors(t_data *data)
 		error_handler(data, -5);
 }
 
-void	check_dot_cub(char *file)
+void	check_extension(char *file, char *extension)
 {
 	int	i;
 
 	i = ft_strlen(file);
 	i -= 4;
-	if (ft_strncmp(&file[i], ".cub", 4) == 0)
+	if (ft_strncmp(&file[i], extension, 4) == 0)
 		return ;
 	ft_printf(RED "ERROR!\nWrong extension!\n" NRM);
 	exit(-3);

@@ -6,7 +6,7 @@
 /*   By: ccosta-c <ccosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:22:26 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/11/15 19:11:04 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/11/17 13:58:23 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,17 @@ int	error_handler(t_data *data, int i)
 		printf(RED "Error\nPlease provide the ceiling RGB data.\n" NRM);
 	if (i == -5)
 		printf(RED "Error\nPlease provide the floor RGB data.\n" NRM);
+	if (i == -6)
+		printf(RED "Error\nSomething went wrong opening the xpm file.\n" NRM);
+	if (i == -7)
+		printf(RED "Error\nInvalid characters in colors RGB color code.\n" NRM);
 	free_exit(data);
 	exit(i);
 }
 
 void	free_exit(t_data *data)
 {
+	free_mlx(data);
 	if (data->info->no_tex)
 		free(data->info->no_tex);
 	if (data->info->so_tex)
@@ -38,4 +43,17 @@ void	free_exit(t_data *data)
 		free(data->info->we_tex);
 	free(data->info);
 	free(data);
+}
+
+void	free_mlx(t_data *data)
+{
+	if (data->textures->no && data->textures->so && data->textures->ea
+		&& data->textures->we)
+	{
+		mlx_destroy_image(data->mlx, data->textures->no);
+		mlx_destroy_image(data->mlx, data->textures->so);
+		mlx_destroy_image(data->mlx, data->textures->ea);
+		mlx_destroy_image(data->mlx, data->textures->we);
+		mlx_destroy_display(data->mlx);
+	}
 }

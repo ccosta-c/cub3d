@@ -6,7 +6,7 @@
 /*   By: ccosta-c <ccosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:39:41 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/11/15 19:02:42 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/11/17 13:54:56 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,21 +47,33 @@ typedef struct s_info
 	bool	ceiling_rgb;
 }			t_info;
 
+typedef struct s_textures
+{
+	int		height;
+	int		width;
+	void	*no;
+	void	*so;
+	void	*we;
+	void	*ea;
+}			t_textures;
+
 typedef struct s_data
 {
-	t_info	*info;
-}			t_data;
-
+	t_info		*info;
+	void		*mlx;
+	t_textures	*textures;
+}				t_data;
 
 ///////////////////////parser.c////////////////////////
 void	parser(t_data *data, char *path);
 void	get_tex_col(t_data *data, int fd);
 void	get_textures(t_data *data, char *line);
 void	get_colors(t_data	*data, char *line);
+void	check_numeric(char **rgb, t_data *data);
 
 ///////////////////////checks.c////////////////////////
 void	check_colors(t_data *data);
-void	check_dot_cub(char *file);
+void	check_extension(char *file, char *extension);
 
 ////////////////////////utils.c////////////////////////
 
@@ -72,8 +84,11 @@ void	print_cub_info(t_data *data);
 ///////////////////////frees.c/////////////////////////
 int		error_handler(t_data *data, int i);
 void	free_exit(t_data *data);
+void	free_mlx(t_data *data);
 
 /////////////////////initialize.c//////////////////////
 t_data	*initialize_struct(void);
+void	start_mlx(t_data *data);
+void	open_images(t_data *data);
 
 #endif

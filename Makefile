@@ -29,18 +29,19 @@ AR = ar -rcs
 #_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_ FLAGS _/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_
 CFLAGS		= -Wall -Wextra -Werror -g
 MKFLAGS		= --no-print-directory
-LIBXFLAGS	= -L ./minilibx-linux -Ilmlx -lXext -lX11 -lm
+MFLAGS	= -lXext -lX11
 LIBFTFLAGS	= -L ./libft -lft
 
 #_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_ FOLDERS _/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_
 DEPS		= includes
 SRCS		= .
 SRCS_BONUS	= bonus
-LIBFT		= libft
-LIBX 		= minilibx-linux
+LIBFT = ./libft/libft.a
+MINILIBX = ./minilibx-linux/libmlx.a
 
 #_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_ FILES _/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_
 SRC				=	parser.c \
+					main.c \
 					debugging.c \
 					utils.c \
 					frees.c \
@@ -58,33 +59,33 @@ TARGET_BONUS	= $(addprefix $(SRCS_BONUS)/, $(OBJS_BONUS))
 #_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_ RULES _/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_
 all: $(NAME)
 
-$(NAME): $(TARGET)
-	echo "[$(CYAN)Compiling$(RESET)] $(CFLAGS) $(GREEN)libft/*$(RESET)"
-	make $(MKFLAGS) -C $(LIBFT)
-	echo "[$(CYAN)Compiling$(RESET)] $(CFLAGS) $(GREEN)minilibx-linux/*$(RESET)"
-	make all $(MKFLAGS) -sC $(LIBX)
+$(LIBFT):
+	@$(MAKE) -C ./libft
 
-	$(CC) $(CFLAGS) main.c $(TARGET) $(LIBFTFLAGS) $(LIBXFLAGS) -o $(NAME)
+$(MINILIBX):
+	@$(MAKE) -C ./minilibx-linux
 
-	echo "$(GREEN)Done.$(RESET)"
+$(NAME): $(OBJS) $(LIBFT) $(MINILIBX)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MINILIBX) $(MFLAGS) -o $(NAME) -lm
+	clear
 
 %.o : %.c
 	echo "[$(CYAN)Compiling$(RESET)] $(CFLAGS) $(GREEN)$<$(RESET)"
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	make clean $(MKFLAGS) -C $(LIBFT)
-	echo "[$(RED) Deleted $(RESET)] $(GREEN)libft/*.o$(RESET)"
-	make clean $(MKFLAGS) -C $(LIBX)
-	echo "[$(RED) Deleted $(RESET)] $(GREEN)minilibx-linux/*.o$(RESET)"
-	echo "[$(RED) Deleted $(RESET)] $(GREEN)*/*.o$(RESET)"
-	$(RM) $(TARGET) $(TARGET_BONUS)
+	@$(MAKE) clean -C ./libft
+	@$(MAKE) clean -C ./minilibx-linux
+	@$(RM) $(OBJS)
+	clear
+	echo "$(RED)Object files have been deleted!$(RESET)"
 
 fclean: clean
-	make fclean $(MKFLAGS) -C $(LIBFT)
-	echo "[$(RED) Deleted $(RESET)] $(GREEN)$(NAME)$(RESET)"
-	$(RM) $(NAME)
-	$(RM) $(NAME_BONUS)
+	@$(MAKE) fclean -C ./libft
+	@$(MAKE) clean -C ./minilibx-linux
+	@$(RM) $(NAME)
+	clear
+	echo "$(RED)Object and Executable files have been deleted!$(RESET)"
 
 bonus: $(TARGET_BONUS)
 	echo "[$(CYAN)Compiling$(RESET)] $(CFLAGS) $(GREEN)libft/*$(RESET)"

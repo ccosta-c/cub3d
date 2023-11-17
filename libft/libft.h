@@ -16,7 +16,7 @@ ft_isdigit 	- Test for a decimal digit character;
 ft_isalnum 	- Test for an alphanumeric character;
 ft_isascii 	- Test for an ASCII character;
 ft_isprint 	- Test for any printing character, including space;
-ft_strlen 	- Calculate the length of a string;
+ft_strlen 	- Calculate the width of a string;
 ft_memset 	- Fills the first *n* bytes of the memory area pointed to by *s*
 ft_bzero	- Write zeroes to a byte string;
 ft_memcpy 	- Copy memory area up to *n* bytes, does not handle overlaps;
