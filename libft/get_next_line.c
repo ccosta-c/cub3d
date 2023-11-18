@@ -12,96 +12,70 @@
 
 #include "libft.h"
 
-static char	*ft_read_dirty_line(char *stash, int fd)
+static char	*ft_get_line(int fd, char *buffer, char *stash)
 {
-	int		bytes_read;
-	char	*content_read;
-	char	*tmp;
+    int		bytes_read;
+    char	*temp;
 
-	content_read = ft_calloc(sizeof(char), (BUFFER_SIZE + 1));
-	bytes_read = 1;
-	while ((bytes_read > 0) && !(ft_strchr(content_read, '\n')))
-	{
-		bytes_read = read(fd, content_read, BUFFER_SIZE);
-		if (bytes_read < 0)
-		{
-			if (stash)
-				free (stash);
-			free (content_read);
-			return (NULL);
-		}
-		*(content_read + bytes_read) = '\0';
-		tmp = ft_strjoin(stash, content_read);
-		free (stash);
-		stash = tmp;
-	}
-	free (content_read);
-	return (stash);
+    bytes_read = 1;
+    while (bytes_read != 0)
+    {
+        bytes_read = read(fd, buffer, BUFFER_SIZE);
+        if (bytes_read < 0)
+            return (0);
+        if (bytes_read == 0)
+            break ;
+        buffer[bytes_read] = '\0';
+        if (!stash)
+            stash = ft_strdup("");
+        temp = stash;
+        stash = ft_strjoin(temp, buffer);
+        free(temp);
+        if (ft_strchr(buffer, '\n'))
+            break ;
+    }
+    return (stash);
 }
 
-static char	*ft_clean_line(char *stash)
+static char	*ft_get_stash(char *line)
 {
-	char	*line;
-	int		i;
+    int		i;
+    char	*stash;
 
-	i = 0;
-	if (!(*(stash + i)))
-		return (NULL);
-	while ((*(stash + i) != '\n') && (*(stash + i) != '\0'))
-		i++;
-	line = ft_calloc(sizeof(char), (i + 2));
-	if (!line)
-		return (NULL);
-	i = 0;
-	while ((*(stash + i) != '\n' && (*(stash + i) != '\0')))
-	{
-		*(line + i) = *(stash + i);
-		i++;
-	}
-	*(line + i) = *(stash + i);
-	i++;
-	*(line + i) = '\0';
-	return (line);
-}
-
-static char	*ft_get_trash(char *stash)
-{
-	char	*tmp;
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	while ((*(stash + i) != '\n') && (*(stash + i) != '\0'))
-		i++;
-	if (!(*(stash + i)))
-	{
-		free(stash);
-		return (NULL);
-	}
-	tmp = ft_calloc(sizeof(char), ((ft_strlen(stash) - i)));
-	if (!tmp)
-		return (NULL);
-	i++;
-	while ((*(stash + i)) != '\0')
-		*(tmp + j++) = *(stash + i++);
-	free (stash);
-	return (tmp);
+    i = 0;
+    while (line[i] && line[i] != '\n')
+        i++;
+    if (line[i] == '\0')
+        return (0);
+    stash = ft_substr(line, i + 1, ft_strlen(line) - i);
+    if (stash[0] == '\0')
+    {
+        free(stash);
+        stash = 0;
+    }
+    line[i + 1] = '\0';
+    return (stash);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*stash[MAX_FILES];
-	char		*clean_line;
+    char		*buffer;
+    char		*line;
+    static char	*stash[FOPEN_MAX];
 
-	if (fd < 0 || fd > MAX_FILES || BUFFER_SIZE < 1)
-	{
-		return (NULL);
-	}
-	*(stash + fd) = ft_read_dirty_line(*(stash + fd), fd);
-	if (!*(stash + fd))
-		return (NULL);
-	clean_line = ft_clean_line(*(stash + fd));
-	*(stash + fd) = ft_get_trash(*(stash + fd));
-	return (clean_line);
+    if (fd < 0 || BUFFER_SIZE <= 0 || fd > FOPEN_MAX)
+        return (0);
+    buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+    if (!buffer)
+        return (0);
+    line = ft_get_line(fd, buffer, stash[fd]);
+    free(buffer);
+    if (!line)
+    {
+        free(stash[fd]);
+        stash[fd] = 0;
+        return (stash[fd]);
+    }
+    stash[fd] = ft_get_stash(line);
+    return (line);
 }

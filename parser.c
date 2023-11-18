@@ -34,9 +34,15 @@ void	get_tex_col(t_data *data, int fd)
 		if (!line)
 			break ;
 		get_textures(data, line);
-		get_colors(data, line);
+		if (get_colors(data, line) == -1)
+        {
+            free(line);
+            close(fd);
+            error_handler(data, -7);
+        }
 		free(line);
 	}
+    check_textures(data);
 	check_colors(data);
 }
 
@@ -62,10 +68,9 @@ void	get_textures(t_data *data, char *line)
 		data->info->ea_tex = ft_strtrim(pp[1], "\n");
 	}
 	free_array(pp);
-    check_textures(data);
 }
 
-void	get_colors(t_data	*data, char *line)
+int get_colors(t_data	*data, char *line)
 {
 	char	**rgb;
 	char	*colors;
@@ -75,10 +80,9 @@ void	get_colors(t_data	*data, char *line)
 		colors = ft_strtrim(line, "F ");
 		rgb = ft_split(colors, ',');
 		free(colors);
-		data->info->floor_r = ft_atoi(rgb[0]);
-		data->info->floor_g = ft_atoi(rgb[1]);
-		data->info->floor_b = ft_atoi(rgb[2]);
-		data->info->floor_rgb = true;
+        if (check_numeric(rgb) == -1)
+            return(free_array(rgb), -1);
+        convert_string_to_rgb(data, rgb, 'F');
 		free_array(rgb);
 	}
 	if (ft_strncmp("C", line, 1) == 0 && data->info->ceiling_rgb == false)
@@ -86,33 +90,10 @@ void	get_colors(t_data	*data, char *line)
 		colors = ft_strtrim(line, "C ");
 		rgb = ft_split(colors, ',');
 		free(colors);
-		check_numeric(rgb, data);
-		data->info->ceiling_r = ft_atoi(rgb[0]);
-		data->info->ceiling_g = ft_atoi(rgb[1]);
-		data->info->ceiling_b = ft_atoi(rgb[2]);
-		data->info->ceiling_rgb = true;
+        if (check_numeric(rgb) == -1)
+            return(free_array(rgb), -1);
+        convert_string_to_rgb(data, rgb, 'C');
 		free_array(rgb);
 	}
-}
-
-void	check_numeric(char **rgb, t_data *data)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < 3)
-	{
-        j = 0;
-		while (rgb[i][j])
-		{
-			if ((!((rgb[i][j] >= '0') && (rgb[i][j] <= '9'))) && (rgb[i][j]  != ' ') && (rgb[i][j]  != '\n'))
-            {
-				free_array(rgb);
-				error_handler(data, -7);
-			}
-			j++;
-		}
-		i++;
-	}
+    return (0);
 }

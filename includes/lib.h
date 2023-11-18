@@ -68,16 +68,16 @@ typedef struct s_data
 void	parser(t_data *data, char *path);
 void	get_tex_col(t_data *data, int fd);
 void	get_textures(t_data *data, char *line);
-void	get_colors(t_data	*data, char *line);
-void	check_numeric(char **rgb, t_data *data);
+int     get_colors(t_data	*data, char *line);
 
 ///////////////////////checks.c////////////////////////
 void	check_colors(t_data *data);
 void	check_extension(char *file, char *extension);
 void    check_textures(t_data *data);
+int     check_numeric(char **rgb);
 
 ////////////////////////utils.c////////////////////////
-
+void    convert_string_to_rgb(t_data *data, char **rgb, char place);
 
 /////////////////////debugging.c///////////////////////
 void	print_cub_info(t_data *data);

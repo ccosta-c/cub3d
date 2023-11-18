@@ -12,6 +12,8 @@
 
 #include "includes/lib.h"
 
+//check leak on get_next_line in 42 computers, only leak.
+
 int	main(int argc, char **argv)
 {
 	t_data	*data;

@@ -29,6 +29,7 @@ t_data	*initialize_struct(void)
 	structure->info->ceiling_b = 0;
 	structure->info->floor_rgb = false;
 	structure->info->ceiling_rgb = false;
+    structure->mlx = NULL;
 	structure->textures->no = NULL;
 	structure->textures->so = NULL;
 	structure->textures->ea = NULL;
@@ -37,7 +38,6 @@ t_data	*initialize_struct(void)
     structure->info->so_tex = NULL;
     structure->info->ea_tex = NULL;
     structure->info->we_tex = NULL;
-
 	return (structure);
 }
 

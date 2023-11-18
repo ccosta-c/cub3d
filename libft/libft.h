@@ -76,7 +76,7 @@ get_next_line	- Read a line from a file descriptor;
 # include <limits.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 5
+#  define BUFFER_SIZE 10
 # endif
 
 # ifndef MAX_FILES

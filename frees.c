@@ -42,6 +42,8 @@ void	free_exit(t_data *data)
 	if (data->info->we_tex)
 		free(data->info->we_tex);
 	free(data->info);
+    free(data->textures);
+    free(data->mlx);
 	free(data);
 }
 

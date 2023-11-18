@@ -1,8 +1,6 @@
-        NO                    ./textures/test_n_letter.xpm
-
+NO ./textures/test_n_letter.xpm
+SO ./textures/test_s_letter.xpm
 WE ./textures/test_w_letter.xpm
 EA ./textures/test_e_letter.xpm
-
-F            	255,255, 255a
-C 0,                                  0,0
-
+F 255,255,255fff
+C 0,50,100
