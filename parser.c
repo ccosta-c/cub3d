@@ -6,17 +6,17 @@
 /*   By: ccosta-c <ccosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:40:12 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/11/17 13:53:27 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/11/18 20:31:18 by logname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/lib.h"
 
-void	parser(t_data *data, char *path)
+void	parser(t_data *data)
 {
 	int	fd;
 
-	fd = open(path, O_RDONLY);
+	fd = open(data->info->file_path, O_RDONLY);
 	if (fd == -1)
 		error_handler(data, -1);
 	get_tex_col(data, fd);

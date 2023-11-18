@@ -66,7 +66,8 @@ int check_numeric(char **rgb)
         j = 0;
         while (rgb[i][j])
         {
-            if ((!((rgb[i][j] >= '0') && (rgb[i][j] <= '9'))) && (rgb[i][j]  != ' ') && (rgb[i][j]  != '\n'))
+            if ((!((rgb[i][j] >= '0') && (rgb[i][j] <= '9'))) && (rgb[i][j]  != ' ')
+                && (rgb[i][j]  != '\n'  && (rgb[i][j]  != '-')))
             {
                 return (-1);
             }

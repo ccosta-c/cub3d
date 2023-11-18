@@ -46,7 +46,8 @@ SRC				=	parser.c \
 					utils.c \
 					frees.c \
 					initialize.c \
-					checks.c
+					checks.c \
+					check_map.c
 OBJS 			:= $(SRC:.c=.o)
 BONUS			=
 OBJS_BONUS		:= $(BONUS:.c=.o)

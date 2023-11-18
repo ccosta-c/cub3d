@@ -21,9 +21,10 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 	{
 		check_extension(argv[1], ".cub");
-		data = initialize_struct();
-		parser(data, argv[1]);
+		data = initialize_struct(argv[1]);
+		parser(data);
 		start_mlx(data);
+		get_map(data);
 		free_exit(data);
 	}
 	else

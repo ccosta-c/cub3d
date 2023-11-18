@@ -6,7 +6,7 @@
 /*   By: ccosta-c <ccosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:39:41 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/11/17 13:54:56 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/11/18 20:35:19 by logname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 
 typedef struct s_info
 {
+    char    *file_path;
 	char	*no_tex;
 	char	*so_tex;
 	char	*we_tex;
@@ -62,10 +63,13 @@ typedef struct s_data
 	t_info		*info;
 	void		*mlx;
 	t_textures	*textures;
+    char        **map;
+	int			map_height;
+    int         map_start;
 }				t_data;
 
 ///////////////////////parser.c////////////////////////
-void	parser(t_data *data, char *path);
+void	parser(t_data *data);
 void	get_tex_col(t_data *data, int fd);
 void	get_textures(t_data *data, char *line);
 int     get_colors(t_data	*data, char *line);
@@ -88,8 +92,13 @@ void	free_exit(t_data *data);
 void	free_mlx(t_data *data);
 
 /////////////////////initialize.c//////////////////////
-t_data	*initialize_struct(void);
+t_data	*initialize_struct(char *path);
 void	start_mlx(t_data *data);
 void	open_images(t_data *data);
+
+/////////////////////check_map.c//////////////////////
+void    get_map(t_data *data);
+void    get_height(t_data *data);
+int     check_line(t_data *data, char *line);
 
 #endif
