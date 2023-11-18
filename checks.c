@@ -38,3 +38,19 @@ void	check_extension(char *file, char *extension)
 	ft_printf(RED "ERROR!\nWrong extension!\n" NRM);
 	exit(-3);
 }
+
+void    check_textures(t_data *data)
+{
+    printf("%s", data->info->so_tex);
+    if (!data->info->no_tex)
+        printf(RED "Error\nNorth texture is missing.\n" NRM);
+    if (!data->info->so_tex)
+        printf(RED "Error\nSouth texture is missing.\n" NRM);
+    if (!data->info->ea_tex)
+        printf(RED "Error\nEast texture is missing.\n" NRM);
+    if (!data->info->we_tex)
+        printf(RED "Error\nWest texture is missing.\n" NRM);
+    if ((data->textures->no == NULL) || (data->textures->so == NULL)
+           || (data->textures->ea == NULL) || (data->textures->we == NULL))
+        error_handler(data, 0);
+}

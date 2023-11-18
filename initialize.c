@@ -29,16 +29,21 @@ t_data	*initialize_struct(void)
 	structure->info->ceiling_b = 0;
 	structure->info->floor_rgb = false;
 	structure->info->ceiling_rgb = false;
-	structure->mlx = mlx_init();
 	structure->textures->no = NULL;
 	structure->textures->so = NULL;
 	structure->textures->ea = NULL;
 	structure->textures->we = NULL;
+    structure->info->no_tex = NULL;
+    structure->info->so_tex = NULL;
+    structure->info->ea_tex = NULL;
+    structure->info->we_tex = NULL;
+
 	return (structure);
 }
 
 void	start_mlx(t_data *data)
 {
+    data->mlx = mlx_init();
 	open_images(data);
 }
 

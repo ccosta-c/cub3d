@@ -62,6 +62,7 @@ void	get_textures(t_data *data, char *line)
 		data->info->ea_tex = ft_strtrim(pp[1], "\n");
 	}
 	free_array(pp);
+    check_textures(data);
 }
 
 void	get_colors(t_data	*data, char *line)
@@ -106,6 +107,7 @@ void	check_numeric(char **rgb, t_data *data)
 		while (rgb[i][j])
 		{
 			if ((!((rgb[i][j] >= '0') && (rgb[i][j] <= '9'))) && (rgb[i][j]  != ' ') && (rgb[i][j]  != '\n'))
+            {
 				free_array(rgb);
 				error_handler(data, -7);
 			}

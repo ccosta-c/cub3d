@@ -74,6 +74,7 @@ void	check_numeric(char **rgb, t_data *data);
 ///////////////////////checks.c////////////////////////
 void	check_colors(t_data *data);
 void	check_extension(char *file, char *extension);
+void    check_textures(t_data *data);
 
 ////////////////////////utils.c////////////////////////
 

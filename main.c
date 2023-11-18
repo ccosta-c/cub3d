@@ -25,7 +25,5 @@ int	main(int argc, char **argv)
 		free_exit(data);
 	}
 	else
-	{
 		printf(RED "Error\nPlease include the map file.\n" NRM);
-	}
 }
