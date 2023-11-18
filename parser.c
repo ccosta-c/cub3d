@@ -100,13 +100,12 @@ void	check_numeric(char **rgb, t_data *data)
 	int	j;
 
 	i = 0;
-	j = 0;
-	while (rgb[i])
+	while (i < 3)
 	{
+        j = 0;
 		while (rgb[i][j])
 		{
-			if (!(ft_isdigit(rgb[i][j])))
-			{
+			if ((!((rgb[i][j] >= '0') && (rgb[i][j] <= '9'))) && (rgb[i][j]  != ' ') && (rgb[i][j]  != '\n'))
 				free_array(rgb);
 				error_handler(data, -7);
 			}
