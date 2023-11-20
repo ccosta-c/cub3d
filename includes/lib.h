@@ -6,7 +6,7 @@
 /*   By: ccosta-c <ccosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:39:41 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/11/19 05:33:22 by logname          ###   ########.fr       */
+/*   Updated: 2023/11/20 09:22:40 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 
 typedef struct s_info
 {
-    char    *file_path;
+	char	*file_path;
 	char	*no_tex;
 	char	*so_tex;
 	char	*we_tex;
@@ -63,26 +63,26 @@ typedef struct s_data
 	t_info		*info;
 	void		*mlx;
 	t_textures	*textures;
-    char        **map;
+	char		**map;
 	int			map_height;
 	int			map_width;
-    bool		map_found;
+	bool		map_found;
 }				t_data;
 
 ///////////////////////parser.c////////////////////////
 void	parser(t_data *data);
 void	get_tex_col(t_data *data, int fd);
 void	get_textures(t_data *data, char *line);
-int     get_colors(t_data	*data, char *line);
+int		get_colors(t_data	*data, char *line);
 
 ///////////////////////checks.c////////////////////////
 void	check_colors(t_data *data);
 void	check_extension(char *file, char *extension);
-void    check_textures(t_data *data);
-int     check_numeric(char **rgb);
+void	check_textures(t_data *data);
+int		check_numeric(char **rgb);
 
 ////////////////////////utils.c////////////////////////
-void    convert_string_to_rgb(t_data *data, char **rgb, char place);
+void	convert_string_to_rgb(t_data *data, char **rgb, char place);
 
 /////////////////////debugging.c///////////////////////
 void	print_cub_info(t_data *data);
@@ -96,11 +96,12 @@ void	free_mlx(t_data *data);
 t_data	*initialize_struct(char *path);
 void	start_mlx(t_data *data);
 void	open_images(t_data *data);
+t_info	*initialize_tinfo(char *path);
 
 /////////////////////check_map.c//////////////////////
-void    get_map(t_data *data);
-void    get_size(t_data *data);
-int     check_line(t_data *data, char *line);
+void	get_map(t_data *data);
+void	get_size(t_data *data);
+int		check_line(t_data *data, char *line);
 void	check_width(t_data *data, char *line);
 
 #endif

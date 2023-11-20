@@ -6,7 +6,7 @@
 /*   By: ccosta-c <ccosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 16:48:56 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/11/18 21:10:28 by logname          ###   ########.fr       */
+/*   Updated: 2023/11/20 09:22:54 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,37 +17,24 @@ t_data	*initialize_struct(char *path)
 	t_data	*structure;
 
 	structure = malloc((sizeof (t_data)));
-	structure->info = malloc(sizeof (t_info));
+	structure->info = initialize_tinfo(path);
 	structure->textures = malloc(sizeof (t_textures));
-	structure->info->file_path = ft_strdup(path);
 	structure->textures->height = 0;
 	structure->textures->width = 0;
-	structure->info->floor_r = 0;
-	structure->info->floor_g = 0;
-	structure->info->floor_b = 0;
-	structure->info->ceiling_r = 0;
-	structure->info->ceiling_g = 0;
-	structure->info->ceiling_b = 0;
 	structure->map_height = 0;
 	structure->map_width = 0;
 	structure->map_found = false;
-	structure->info->floor_rgb = false;
-	structure->info->ceiling_rgb = false;
-    structure->mlx = NULL;
+	structure->mlx = NULL;
 	structure->textures->no = NULL;
 	structure->textures->so = NULL;
 	structure->textures->ea = NULL;
 	structure->textures->we = NULL;
-    structure->info->no_tex = NULL;
-    structure->info->so_tex = NULL;
-    structure->info->ea_tex = NULL;
-    structure->info->we_tex = NULL;
 	return (structure);
 }
 
 void	start_mlx(t_data *data)
 {
-    data->mlx = mlx_init();
+	data->mlx = mlx_init();
 	open_images(data);
 }
 
@@ -64,4 +51,25 @@ void	open_images(t_data *data)
 	if ((data->textures->no == NULL) || (data->textures->so == NULL)
 		|| (data->textures->ea == NULL) || (data->textures->we == NULL))
 		error_handler(data, -6);
+}
+
+t_info	*initialize_tinfo(char *path)
+{
+	t_info	*structure;
+
+	structure = malloc(sizeof (t_info));
+	structure->file_path = ft_strdup(path);
+	structure->floor_r = 0;
+	structure->floor_g = 0;
+	structure->floor_b = 0;
+	structure->ceiling_r = 0;
+	structure->ceiling_g = 0;
+	structure->ceiling_b = 0;
+	structure->floor_rgb = false;
+	structure->ceiling_rgb = false;
+	structure->no_tex = NULL;
+	structure->so_tex = NULL;
+	structure->ea_tex = NULL;
+	structure->we_tex = NULL;
+	return (structure);
 }

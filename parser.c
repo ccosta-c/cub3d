@@ -35,14 +35,14 @@ void	get_tex_col(t_data *data, int fd)
 			break ;
 		get_textures(data, line);
 		if (get_colors(data, line) == -1)
-        {
-            free(line);
-            close(fd);
-            error_handler(data, -7);
-        }
+		{
+			free(line);
+			close(fd);
+			error_handler(data, -7);
+		}
 		free(line);
 	}
-    check_textures(data);
+	check_textures(data);
 	check_colors(data);
 }
 
@@ -70,7 +70,7 @@ void	get_textures(t_data *data, char *line)
 	free_array(pp);
 }
 
-int get_colors(t_data	*data, char *line)
+int	get_colors(t_data	*data, char *line)
 {
 	char	**rgb;
 	char	*colors;
@@ -80,9 +80,9 @@ int get_colors(t_data	*data, char *line)
 		colors = ft_strtrim(line, "F ");
 		rgb = ft_split(colors, ',');
 		free(colors);
-        if (check_numeric(rgb) == -1)
-            return(free_array(rgb), -1);
-        convert_string_to_rgb(data, rgb, 'F');
+		if (check_numeric(rgb) == -1)
+			return (free_array(rgb), -1);
+		convert_string_to_rgb(data, rgb, 'F');
 		free_array(rgb);
 	}
 	if (ft_strncmp("C", line, 1) == 0 && data->info->ceiling_rgb == false)
@@ -90,10 +90,10 @@ int get_colors(t_data	*data, char *line)
 		colors = ft_strtrim(line, "C ");
 		rgb = ft_split(colors, ',');
 		free(colors);
-        if (check_numeric(rgb) == -1)
-            return(free_array(rgb), -1);
-        convert_string_to_rgb(data, rgb, 'C');
+		if (check_numeric(rgb) == -1)
+			return (free_array(rgb), -1);
+		convert_string_to_rgb(data, rgb, 'C');
 		free_array(rgb);
 	}
-    return (0);
+	return (0);
 }

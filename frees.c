@@ -6,7 +6,7 @@
 /*   By: ccosta-c <ccosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:22:26 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/11/18 21:17:27 by logname          ###   ########.fr       */
+/*   Updated: 2023/11/20 08:58:41 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	free_exit(t_data *data)
 		free(data->info->we_tex);
 	free(data->info->file_path);
 	free(data->info);
-    free(data->textures);
+	free(data->textures);
 	free(data);
 }
 
