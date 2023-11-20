@@ -6,7 +6,7 @@
 /*   By: ccosta-c <ccosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:37:30 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/11/20 10:32:52 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/11/20 11:40:24 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	get_map(t_data *data)
 {
 	get_size(data);
-	get_map_array(data);
 	printf("Map Height- %i\n", data->map_height + 1);
 	printf("Map Width- %i\n", data->map_width + 1);
+	get_map_array(data);
 	print_array(data->map);
 }
 
@@ -51,25 +51,30 @@ void	write_line(t_data *data, char *line, int j)
 	int		i;
 	int		l;
 	bool	written_stuff;
+	char	*new_line;
 
 	written_stuff = false;
 	i = 0;
 	l = 0;
+	new_line = ft_strtrim(line, "\n");
 	data->map[j] = malloc(sizeof (char) * data->map_width + 2);
-	while (line[i])
+	while (new_line[i])
 	{
 		if (written_stuff == false)
 		{
-			data->map[j][l++] = line[i];
-			if (line[i] != ' ' && line[i] != '\t')
+			data->map[j][l++] = new_line[i];
+			if (new_line[i] != ' ' && new_line[i] != '\t')
 				written_stuff = true;
 		}
 		else
 		{
-			if (line[i] != ' ' && line[i] != '\t')
-				data->map[j][l++] = line[i];
+			if (new_line[i] != ' ' && new_line[i] != '\t')
+				data->map[j][l++] = new_line[i];
 			else
-				check_rest_line(data->map[j], line, &i, &l);
+			{
+				check_rest_line(data->map[j], new_line, &i, &l);
+				break ;
+			}
 		}
 		i++;
 	}
@@ -81,16 +86,17 @@ void	check_rest_line(char *array_line, char *line, int *i, int *l)
 	int	len;
 	len = strlen(line);
 
-	while (len < 0)
+	while (len > 0)
 	{
 		if (line[len] != ' ' && line[len] != '\t')
 			break ;
 		len--;
 	}
-	while (*i <= len)
+	while (*i < len || i < data->map_width)
 	{
 		array_line[*l] = line[*i];
-		i++;
+		(*l)++;
+		(*i)++;
 	}
 }
 
