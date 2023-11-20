@@ -6,7 +6,7 @@
 /*   By: ccosta-c <ccosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:37:30 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/11/20 12:13:20 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/11/20 12:19:34 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	write_line(t_data *data, char *line, int j)
 		data->map[j][l++] = new_line[i++];
 	}
 	fill_line(data, data->map[j], l);
+	free(new_line);
 }
 
 void	fill_line(t_data *data, char *array_line, int l)

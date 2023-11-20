@@ -6,7 +6,7 @@
 /*   By: ccosta-c <ccosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 17:43:54 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/11/17 10:11:05 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/11/20 12:40:04 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 void	check_colors(t_data *data)
 {
+	if ((data->info->floor_r == -1) || (data->info->floor_g == -1)
+		|| (data->info->floor_b == -1) || (data->info->ceiling_r == -1)
+		|| (data->info->ceiling_g == -1) || (data->info->ceiling_b == -1))
+		error_handler(data, -9);
 	if ((data->info->floor_r < 0 || data->info->floor_r > 255)
 		|| (data->info->floor_g < 0 || data->info->floor_g > 255)
 		|| (data->info->floor_b < 0 || data->info->floor_b > 255)

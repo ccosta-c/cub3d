@@ -110,6 +110,6 @@ void	get_map(t_data *data);
 void	get_map_array(t_data *data);
 void	write_line(t_data *data, char *line, int j);
 void	check_rest_line(char *array_line, char *line, int *i, int *l);
-void fill_line(t_data *data, char *array_line, int l);
+void	fill_line(t_data *data, char *array_line, int l);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ccosta-c <ccosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:22:26 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/11/20 08:58:41 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/11/20 12:42:01 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	error_handler(t_data *data, int i)
 		printf(RED "Error\nInvalid characters in colors RGB color code.\n" NRM);
 	if (i == -8)
 		printf(RED "Error\nMap not found\n" NRM);
+	if (i == -9)
+		printf(RED "Error\nOne of the color numbers missing\n" NRM);
 	free_exit(data);
 	exit(i);
 }
@@ -46,6 +48,8 @@ void	free_exit(t_data *data)
 	free(data->info->file_path);
 	free(data->info);
 	free(data->textures);
+	if (data->map)
+		free_array(data->map);
 	free(data);
 }
 

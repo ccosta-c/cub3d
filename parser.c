@@ -6,7 +6,7 @@
 /*   By: ccosta-c <ccosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:40:12 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/11/18 20:31:18 by logname          ###   ########.fr       */
+/*   Updated: 2023/11/20 12:30:20 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ void	parser(t_data *data)
 void	get_tex_col(t_data *data, int fd)
 {
 	char	*line;
+	bool	error;
 
+	error = false;
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -35,12 +37,14 @@ void	get_tex_col(t_data *data, int fd)
 			break ;
 		get_textures(data, line);
 		if (get_colors(data, line) == -1)
-		{
-			free(line);
-			close(fd);
-			error_handler(data, -7);
-		}
+			error = true;
 		free(line);
+	}
+	if (error == true)
+	{
+		free(line);
+		close(fd);
+		error_handler(data, -7);
 	}
 	check_textures(data);
 	check_colors(data);

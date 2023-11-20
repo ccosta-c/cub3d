@@ -6,76 +6,98 @@
 /*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 15:30:14 by ccosta-c          #+#    #+#             */
-/*   Updated: 2022/12/15 11:40:10 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/11/20 12:26:49 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*ft_get_line(int fd, char *buffer, char *stash)
+static char	*ft_untilnl(int fd, char *stash)
 {
-    int		bytes_read;
-    char	*temp;
+	char	*rbuffer;
+	int		rbytes;
+	char	*tmp;
 
-    bytes_read = 1;
-    while (bytes_read != 0)
-    {
-        bytes_read = read(fd, buffer, BUFFER_SIZE);
-        if (bytes_read < 0)
-            return (0);
-        if (bytes_read == 0)
-            break ;
-        buffer[bytes_read] = '\0';
-        if (!stash)
-            stash = ft_strdup("");
-        temp = stash;
-        stash = ft_strjoin(temp, buffer);
-        free(temp);
-        if (ft_strchr(buffer, '\n'))
-            break ;
-    }
-    return (stash);
+	rbuffer = ft_calloc(sizeof(char), (BUFFER_SIZE + 1));
+	rbytes = 42;
+	while (rbytes > 0 && !(ft_strchr(rbuffer, '\n')))
+	{
+		rbytes = read(fd, rbuffer, BUFFER_SIZE);
+		if (rbytes < 0)
+		{
+			if (stash)
+				free (stash);
+			free (rbuffer);
+			return (NULL);
+		}
+		*(rbuffer + rbytes) = '\0';
+		tmp = ft_strjoin(stash, rbuffer);
+		free (stash);
+		stash = tmp;
+	}
+	free (rbuffer);
+	return (stash);
 }
 
-static char	*ft_get_stash(char *line)
+static char	*ft_getline(char *stash)
 {
-    int		i;
-    char	*stash;
+	int		i;
+	char	*line;
 
-    i = 0;
-    while (line[i] && line[i] != '\n')
-        i++;
-    if (line[i] == '\0')
-        return (0);
-    stash = ft_substr(line, i + 1, ft_strlen(line) - i);
-    if (stash[0] == '\0')
-    {
-        free(stash);
-        stash = 0;
-    }
-    line[i + 1] = '\0';
-    return (stash);
+	i = 0;
+	if (!(*(stash + i)))
+		return (NULL);
+	while (*(stash + i) != '\n' && *(stash + i) != '\0')
+		i++;
+	line = malloc(sizeof(char) * (i + 1 + 1));
+	if (!line)
+		return (NULL);
+	i = 0;
+	while (*(stash + i) != '\n' && *(stash + i) != '\0')
+	{
+		*(line + i) = *(stash + i);
+		i++;
+	}
+	*(line + i) = *(stash + i);
+	i++;
+	*(line + i) = '\0';
+	return (line);
+}
+
+static char	*ft_contentnt(char *stash)
+{
+	int		i;
+	int		j;
+	char	*contnl;
+
+	i = 0;
+	while (*(stash + i) != '\n' && *(stash + i) != '\0')
+		i++;
+	if (!(*(stash + i)))
+	{
+		free (stash);
+		return (NULL);
+	}
+	contnl = ft_calloc(sizeof(char), (ft_strlen(stash) - i));
+	i++;
+	j = 0;
+	while (*(stash + i) != '\0')
+		*(contnl + j++) = *(stash + i++);
+	free (stash);
+	return (contnl);
 }
 
 char	*get_next_line(int fd)
 {
-    char		*buffer;
-    char		*line;
-    static char	*stash[FOPEN_MAX];
+	char		*line;
+	static char	*stash;
 
-    if (fd < 0 || BUFFER_SIZE <= 0 || fd > FOPEN_MAX)
-        return (0);
-    buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-    if (!buffer)
-        return (0);
-    line = ft_get_line(fd, buffer, stash[fd]);
-    free(buffer);
-    if (!line)
-    {
-        free(stash[fd]);
-        stash[fd] = 0;
-        return (stash[fd]);
-    }
-    stash[fd] = ft_get_stash(line);
-    return (line);
+	if (fd < 0 || BUFFER_SIZE < 1)
+		return (NULL);
+	stash = ft_untilnl(fd, stash);
+	if (!stash)
+		return (NULL);
+	line = ft_getline(stash);
+	stash = ft_contentnt(stash);
+	return (line);
 }

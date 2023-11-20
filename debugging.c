@@ -6,7 +6,7 @@
 /*   By: ccosta-c <ccosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 14:53:19 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/11/20 12:13:49 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/11/20 12:16:07 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	print_map(t_data *data)
 	int	i;
 
 	i = 0;
+	printf("Map Array:\n");
 	line_print_map(data);
 	while (data->map[i] != NULL)
 	{

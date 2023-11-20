@@ -6,7 +6,7 @@
 /*   By: ccosta-c <ccosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 16:48:56 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/11/20 09:22:54 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/11/20 12:21:45 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_data	*initialize_struct(char *path)
 	structure->textures->so = NULL;
 	structure->textures->ea = NULL;
 	structure->textures->we = NULL;
+	structure->map = NULL;
 	return (structure);
 }
 
