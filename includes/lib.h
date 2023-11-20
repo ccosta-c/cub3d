@@ -86,6 +86,8 @@ void	convert_string_to_rgb(t_data *data, char **rgb, char place);
 
 /////////////////////debugging.c///////////////////////
 void	print_cub_info(t_data *data);
+void	print_map(t_data *data);
+void	line_print_map(t_data *data);
 
 ///////////////////////frees.c/////////////////////////
 int		error_handler(t_data *data, int i);

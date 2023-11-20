@@ -6,7 +6,7 @@
 /*   By: ccosta-c <ccosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:37:30 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/11/20 11:40:24 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/11/20 12:13:20 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	get_map(t_data *data)
 	printf("Map Height- %i\n", data->map_height + 1);
 	printf("Map Width- %i\n", data->map_width + 1);
 	get_map_array(data);
-	print_array(data->map);
+	print_map(data);
 }
 
 void	get_map_array(t_data *data)
@@ -44,65 +44,29 @@ void	get_map_array(t_data *data)
 		}
 		free(line);
 	}
+	data->map[j] = NULL;
 }
 
 void	write_line(t_data *data, char *line, int j)
 {
 	int		i;
 	int		l;
-	bool	written_stuff;
 	char	*new_line;
 
-	written_stuff = false;
 	i = 0;
 	l = 0;
 	new_line = ft_strtrim(line, "\n");
 	data->map[j] = malloc(sizeof (char) * data->map_width + 2);
-	while (new_line[i])
+	while (new_line[i] && i <= data->map_width)
 	{
-		if (written_stuff == false)
-		{
-			data->map[j][l++] = new_line[i];
-			if (new_line[i] != ' ' && new_line[i] != '\t')
-				written_stuff = true;
-		}
-		else
-		{
-			if (new_line[i] != ' ' && new_line[i] != '\t')
-				data->map[j][l++] = new_line[i];
-			else
-			{
-				check_rest_line(data->map[j], new_line, &i, &l);
-				break ;
-			}
-		}
-		i++;
+		data->map[j][l++] = new_line[i++];
 	}
 	fill_line(data, data->map[j], l);
 }
 
-void	check_rest_line(char *array_line, char *line, int *i, int *l)
-{
-	int	len;
-	len = strlen(line);
-
-	while (len > 0)
-	{
-		if (line[len] != ' ' && line[len] != '\t')
-			break ;
-		len--;
-	}
-	while (*i < len || i < data->map_width)
-	{
-		array_line[*l] = line[*i];
-		(*l)++;
-		(*i)++;
-	}
-}
-
 void	fill_line(t_data *data, char *array_line, int l)
 {
-	while (l < data->map_width)
+	while (l <= data->map_width)
 	{
 		array_line[l] = ' ';
 		l++;

@@ -6,7 +6,7 @@
 /*   By: ccosta-c <ccosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 14:53:19 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/11/17 12:54:14 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/11/20 12:13:49 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,29 @@ void	print_cub_info(t_data *data)
 		data->info->ceiling_g, data->info->ceiling_b);
 	printf("Ceiling Color- (%i,%i,%i)\n\n"NRM, data->info->ceiling_r,
 		data->info->ceiling_g, data->info->ceiling_b);
+}
+
+void	print_map(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	line_print_map(data);
+	while (data->map[i] != NULL)
+	{
+		printf("*%s*", data->map[i]);
+		i++;
+		printf("\n");
+	}
+	line_print_map(data);
+}
+
+void	line_print_map(t_data *data)
+{
+	int	i;
+
+	i = -1;
+	while (++i <= data->map_width + 2)
+		printf("*");
+	printf("\n");
 }
