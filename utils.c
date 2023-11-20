@@ -27,5 +27,5 @@ void	convert_string_to_rgb(t_data *data, char **rgb, char place)
 		data->info->ceiling_g = ft_atoi(rgb[1]);
 		data->info->ceiling_b = ft_atoi(rgb[2]);
 		data->info->ceiling_rgb = true;
-    }
+	}
 }

@@ -58,7 +58,6 @@ void	check_textures(t_data *data)
 		error_handler(data, 0);
 }
 
-
 int	check_numeric(char **rgb)
 {
 	int	i;
