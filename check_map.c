@@ -6,23 +6,16 @@
 /*   By: logname <logname@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 19:54:10 by logname           #+#    #+#             */
-/*   Updated: 2023/11/19 06:08:27 by logname          ###   ########.fr       */
+/*   Updated: 2023/11/20 09:35:33 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/lib.h"
 
-void    get_map(t_data *data)
+void	get_size(t_data *data)
 {
-	get_size(data);
-	printf("Map Height- %i\n", data->map_height + 1);
-	printf("Map Width- %i\n", data->map_width + 1);
-}
-
-void    get_size(t_data *data)
-{
-	char *line;
-	int fd;
+	char	*line;
+	int		fd;
 
 	fd = open(data->info->file_path, O_RDONLY);
 	while (1)
@@ -37,20 +30,22 @@ void    get_size(t_data *data)
 		}
 		free(line);
 	}
+	close (fd);
 	if (data->map_found == 0)
 		error_handler(data, -8);
+	data->map_found = 0;
 }
 
 int	check_line(t_data *data, char *line)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while(line[i])
-    {
-		if(line[i] == ' ' || line[i] == '\t')
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == ' ' || line[i] == '\t')
 			i++;
-        else
+		else
 		{
 			if (line[i] == '1')
 			{
@@ -59,8 +54,8 @@ int	check_line(t_data *data, char *line)
 			}
 			return (0);
 		}
-        i++;
-    }
+		i++;
+	}
 	return (0);
 }
 
@@ -70,10 +65,10 @@ void	check_width(t_data *data, char *line)
 	int	i;
 
 	i = 0;
-	length  = 0;
-	while(line[i] != '\n' && line[i] != '\0')
+	length = 0;
+	while (line[i] != '\n' && line[i] != '\0')
 	{
-		if(line[i] == '1' || line[i] == '0' || line[i] == 'N'  || line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
+		if (line[i] != ' ' && line[i] != '\t')
 			length = i;
 		i++;
 	}

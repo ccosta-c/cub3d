@@ -6,7 +6,7 @@
 /*   By: ccosta-c <ccosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:39:41 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/11/20 09:22:40 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/11/20 10:09:09 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,15 @@ void	open_images(t_data *data);
 t_info	*initialize_tinfo(char *path);
 
 /////////////////////check_map.c//////////////////////
-void	get_map(t_data *data);
 void	get_size(t_data *data);
 int		check_line(t_data *data, char *line);
 void	check_width(t_data *data, char *line);
+
+/////////////////////get_map.c////////////////////////
+void	get_map(t_data *data);
+void	get_map_array(t_data *data);
+void	write_line(t_data *data, char *line, int j);
+void	check_rest_line(char *array_line, char *line, int *i, int *l);
+void fill_line(t_data *data, char *array_line, int l);
 
 #endif
