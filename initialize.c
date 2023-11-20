@@ -28,9 +28,9 @@ t_data	*initialize_struct(char *path)
 	structure->info->ceiling_r = 0;
 	structure->info->ceiling_g = 0;
 	structure->info->ceiling_b = 0;
-	structure->map_start = 0;
 	structure->map_height = 0;
-	structure->map_start = 0;
+	structure->map_width = 0;
+	structure->map_found = false;
 	structure->info->floor_rgb = false;
 	structure->info->ceiling_rgb = false;
     structure->mlx = NULL;

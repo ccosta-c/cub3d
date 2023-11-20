@@ -6,7 +6,7 @@
 /*   By: ccosta-c <ccosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:39:41 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/11/18 20:35:19 by logname          ###   ########.fr       */
+/*   Updated: 2023/11/19 05:33:22 by logname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ typedef struct s_data
 	t_textures	*textures;
     char        **map;
 	int			map_height;
-    int         map_start;
+	int			map_width;
+    bool		map_found;
 }				t_data;
 
 ///////////////////////parser.c////////////////////////
@@ -98,7 +99,8 @@ void	open_images(t_data *data);
 
 /////////////////////check_map.c//////////////////////
 void    get_map(t_data *data);
-void    get_height(t_data *data);
+void    get_size(t_data *data);
 int     check_line(t_data *data, char *line);
+void	check_width(t_data *data, char *line);
 
 #endif
