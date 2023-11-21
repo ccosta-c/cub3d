@@ -6,7 +6,7 @@
 /*   By: ccosta-c <ccosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 16:48:56 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/11/20 12:21:45 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/11/21 14:20:35 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ t_info	*initialize_tinfo(char *path)
 	structure->ceiling_r = 0;
 	structure->ceiling_g = 0;
 	structure->ceiling_b = 0;
+	structure->player_x = 0;
+	structure->player_y = 0;
 	structure->floor_rgb = false;
 	structure->ceiling_rgb = false;
 	structure->no_tex = NULL;

@@ -6,7 +6,7 @@
 /*   By: ccosta-c <ccosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:22:26 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/11/20 12:42:01 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/11/21 14:25:57 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	error_handler(t_data *data, int i)
 {
 	if (i == -1)
-		printf(RED "Error\n%s" NRM, strerror(errno));
+		printf(RED "Error\n%s." NRM, strerror(errno));
 	if (i == -2)
 		printf(RED "Error\nColor codes must be between 0 and 255.\n" NRM);
 	if (i == -4)
@@ -27,9 +27,13 @@ int	error_handler(t_data *data, int i)
 	if (i == -7)
 		printf(RED "Error\nInvalid characters in colors RGB color code.\n" NRM);
 	if (i == -8)
-		printf(RED "Error\nMap not found\n" NRM);
+		printf(RED "Error\nMap not found.\n" NRM);
 	if (i == -9)
-		printf(RED "Error\nOne of the color numbers missing\n" NRM);
+		printf(RED "Error\nOne of the color numbers missing.\n" NRM);
+	if (i == -10)
+		printf(RED "Error\nInvalid characters on the map.\n" NRM);
+	if (i == -11)
+		printf(RED "Error\nMore than one player character found.\n" NRM);
 	free_exit(data);
 	exit(i);
 }

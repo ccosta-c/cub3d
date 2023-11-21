@@ -15,10 +15,7 @@
 void	get_map(t_data *data)
 {
 	get_size(data);
-	printf("Map Height- %i\n", data->map_height + 1);
-	printf("Map Width- %i\n", data->map_width + 1);
 	get_map_array(data);
-	print_map(data);
 }
 
 void	get_map_array(t_data *data)

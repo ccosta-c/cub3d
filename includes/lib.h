@@ -6,7 +6,7 @@
 /*   By: ccosta-c <ccosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:39:41 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/11/20 10:09:09 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/11/21 14:20:10 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define NRM "\033[0;37m"
 # define BLD "\033[1;37m"
 # define GRN "\033[1;32m"
+# define GRY "\033[38;2;150;150;150m"
 
 typedef struct s_info
 {
@@ -46,6 +47,8 @@ typedef struct s_info
 	int		ceiling_g;
 	int		ceiling_b;
 	bool	ceiling_rgb;
+	int		player_x;
+	int		player_y;
 }			t_info;
 
 typedef struct s_textures
@@ -111,5 +114,11 @@ void	get_map_array(t_data *data);
 void	write_line(t_data *data, char *line, int j);
 void	check_rest_line(char *array_line, char *line, int *i, int *l);
 void	fill_line(t_data *data, char *array_line, int l);
+
+/////////////////////verify_map.c//////////////////////
+void	verify_map(t_data	*data);
+void	check_borders(t_data *data);
+void	check_characters(char **array, t_data *data);
+void	verify_player(t_data *data, char letter, int x, int y);
 
 #endif

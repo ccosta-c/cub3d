@@ -20,7 +20,6 @@ void	parser(t_data *data)
 	if (fd == -1)
 		error_handler(data, -1);
 	get_tex_col(data, fd);
-	print_cub_info(data);
 	close(fd);
 }
 
