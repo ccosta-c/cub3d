@@ -117,7 +117,7 @@ void	fill_line(t_data *data, char *array_line, int l);
 
 /////////////////////verify_map.c//////////////////////
 void	verify_map(t_data	*data);
-void	check_borders(t_data *data);
+void check_borders(t_data *data, char **array);
 void	check_characters(char **array, t_data *data);
 void	verify_player(t_data *data, char letter, int x, int y);
 
