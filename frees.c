@@ -25,7 +25,7 @@ int	error_handler(t_data *data, int i)
 	if (i == -6)
 		printf(RED "Error\nSomething went wrong opening the xpm file.\n" NRM);
 	if (i == -7)
-		printf(RED "Error\nInvalid characters in colors RGB color code.\n" NRM);
+		printf(RED "Error\nInvalid RGB color code.\n" NRM);
 	if (i == -8)
 		printf(RED "Error\nMap not found.\n" NRM);
 	if (i == -9)

@@ -6,7 +6,7 @@
 /*   By: ccosta-c <ccosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 17:43:54 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/11/20 12:40:04 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/11/23 13:49:33 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 void	check_colors(t_data *data)
 {
+	if (data->info->ceiling_rgb == false)
+		error_handler(data, -4);
+	if (data->info->floor_rgb == false)
+		error_handler(data, -5);
 	if ((data->info->floor_r == -1) || (data->info->floor_g == -1)
 		|| (data->info->floor_b == -1) || (data->info->ceiling_r == -1)
 		|| (data->info->ceiling_g == -1) || (data->info->ceiling_b == -1))
@@ -25,10 +29,6 @@ void	check_colors(t_data *data)
 		|| (data->info->ceiling_g < 0 || data->info->ceiling_g > 255)
 		|| (data->info->ceiling_b < 0 || data->info->ceiling_b > 255))
 		error_handler(data, -2);
-	if (data->info->ceiling_rgb == false)
-		error_handler(data, -4);
-	if (data->info->floor_rgb == false)
-		error_handler(data, -5);
 }
 
 void	check_extension(char *file, char *extension)
@@ -45,16 +45,16 @@ void	check_extension(char *file, char *extension)
 
 void	check_textures(t_data *data)
 {
-	if (!data->info->no_tex)
+	if (!*data->info->no_tex)
 		printf(RED "Error\nNorth texture is missing.\n" NRM);
-	if (!data->info->so_tex)
+	if (!*data->info->so_tex)
 		printf(RED "Error\nSouth texture is missing.\n" NRM);
-	if (!data->info->ea_tex)
+	if (!*data->info->ea_tex)
 		printf(RED "Error\nEast texture is missing.\n" NRM);
-	if (!data->info->we_tex)
+	if (!*data->info->we_tex)
 		printf(RED "Error\nWest texture is missing.\n" NRM);
-	if (!(data->info->no_tex) || !(data->info->so_tex)
-		|| !(data->info->ea_tex) || !(data->info->we_tex))
+	if (!*(data->info->no_tex) || !*(data->info->so_tex)
+		|| !*(data->info->ea_tex) || !*(data->info->we_tex))
 		error_handler(data, 0);
 }
 
@@ -70,8 +70,8 @@ int	check_numeric(char **rgb)
 		while (rgb[i][j])
 		{
 			if ((!((rgb[i][j] >= '0') && (rgb[i][j] <= '9')))
-				&& (rgb[i][j] != ' ') && (rgb[i][j] != '\n'
-				&& (rgb[i][j] != '-')))
+				&& (rgb[i][j] != ' ') && (rgb[i][j] != '-')
+					&& (rgb[i][j] != '\n'))
 			{
 				return (-1);
 			}

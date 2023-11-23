@@ -6,7 +6,7 @@
 /*   By: ccosta-c <ccosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:40:12 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/11/20 12:30:20 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/11/23 14:01:28 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,23 @@ void	parser(t_data *data)
 void	get_tex_col(t_data *data, int fd)
 {
 	char	*line;
-	bool	error;
+	int		error;
 
-	error = false;
+	error = 0;
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
 			break ;
 		get_textures(data, line);
-		if (get_colors(data, line) == -1)
-			error = true;
+		error = get_colors(data, line);
 		free(line);
 	}
-	if (error == true)
+	if (error != 0)
 	{
 		free(line);
 		close(fd);
-		error_handler(data, -7);
+		error_handler(data, error);
 	}
 	check_textures(data);
 	check_colors(data);
@@ -81,6 +80,8 @@ int	get_colors(t_data	*data, char *line)
 	if (ft_strncmp("F", line, 1) == 0 && data->info->floor_rgb == false)
 	{
 		colors = ft_strtrim(line, "F ");
+		if (colors[0] == '\0' || colors[0] == '\n')
+			return (free(colors), -5);
 		rgb = ft_split(colors, ',');
 		free(colors);
 		if (check_numeric(rgb) == -1)
@@ -91,6 +92,8 @@ int	get_colors(t_data	*data, char *line)
 	if (ft_strncmp("C", line, 1) == 0 && data->info->ceiling_rgb == false)
 	{
 		colors = ft_strtrim(line, "C ");
+		if (colors[0] == '\0' || colors[0] == '\n')
+			return (free(colors), -4);
 		rgb = ft_split(colors, ',');
 		free(colors);
 		if (check_numeric(rgb) == -1)
