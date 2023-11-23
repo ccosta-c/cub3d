@@ -6,7 +6,7 @@
 /*   By: ccosta-c <ccosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 14:53:19 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/11/21 14:29:46 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/11/23 11:23:53 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,37 +28,37 @@ void	print_cub_info(t_data *data)
 		data->info->ceiling_g, data->info->ceiling_b);
 	printf("Ceiling Color- (%i,%i,%i)\n\n"BLD, data->info->ceiling_r,
 		data->info->ceiling_g, data->info->ceiling_b);
-	printf(GRN"Retrieving map information:\n"BLD);
+	printf(GRN"Retrieving og_map information:\n"BLD);
 	printf("Map Height: %i\n", data->map_height + 1);
 	printf("Map Width: %i\n", data->map_width + 1);
-	print_map(data);
+	print_map(data, data->og_map, 2);
 }
 
-void	print_map(t_data *data)
+void	print_map(t_data *data, char **map, int size)
 {
 	int	i;
 
 	i = 0;
 	printf("Map Array:\n");
-	line_print_map(data);
-	while (data->map[i] != NULL)
+	line_print_map(data, size);
+	while (map[i] != NULL)
 	{
 		printf(GRY"*"BLD);
-		printf("%s", data->map[i]);
+		printf("%s", map[i]);
 		printf(GRY"*"BLD);
 		i++;
 		printf("\n");
 	}
-	line_print_map(data);
+	line_print_map(data, size);
 	printf("" NRM);
 }
 
-void	line_print_map(t_data *data)
+void	line_print_map(t_data *data, int size)
 {
 	int	i;
 
 	i = -1;
-	while (++i <= data->map_width + 2)
+	while (++i <= data->map_width + size)
 		printf(GRY"*");
 	printf("\n"BLD);
 }

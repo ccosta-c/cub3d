@@ -14,27 +14,10 @@
 
 void	verify_map(t_data	*data)
 {
-	//check_borders(data);
-	check_characters(data->map, data);
+	check_characters(data->og_map, data);
 	print_cub_info(data);
 }
-//
-//void	check_borders(t_data *data)
-//{
-//	int	x;
-//	int	y;
-//
-//	x = 0;
-//	y = 0;
-//	while (y < data->map_height)
-//	{
-//		while (x < data->map_width)
-//		{
-//		}
-//	}
-//}
 
-// I pass the array separated from the structure so i dont have to put the whole structure when calling the array.
 void	check_characters(char **array, t_data *data)
 {
 	int		x;

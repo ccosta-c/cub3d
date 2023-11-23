@@ -31,9 +31,11 @@ int	error_handler(t_data *data, int i)
 	if (i == -9)
 		printf(RED "Error\nOne of the color numbers missing.\n" NRM);
 	if (i == -10)
-		printf(RED "Error\nInvalid characters on the map.\n" NRM);
+		printf(RED "Error\nInvalid characters on the og_map.\n" NRM);
 	if (i == -11)
 		printf(RED "Error\nMore than one player character found.\n" NRM);
+	if (i == -12)
+		printf(RED "Error\nInvalid Map!\n" NRM);
 	free_exit(data);
 	exit(i);
 }
@@ -54,6 +56,8 @@ void	free_exit(t_data *data)
 	free(data->textures);
 	if (data->map)
 		free_array(data->map);
+	if (data->og_map)
+		free_array(data->og_map);
 	free(data);
 }
 

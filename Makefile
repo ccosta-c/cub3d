@@ -49,7 +49,9 @@ SRC				=	parser.c \
 					checks.c \
 					check_map.c \
 					get_map.c \
-					verify_map.c
+					get_map2.c \
+					verify_map.c \
+					check_border.c
 OBJS 			:= $(SRC:.c=.o)
 BONUS			=
 OBJS_BONUS		:= $(BONUS:.c=.o)

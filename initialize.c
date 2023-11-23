@@ -29,7 +29,7 @@ t_data	*initialize_struct(char *path)
 	structure->textures->so = NULL;
 	structure->textures->ea = NULL;
 	structure->textures->we = NULL;
-	structure->map = NULL;
+	structure->og_map = NULL;
 	return (structure);
 }
 

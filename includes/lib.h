@@ -6,7 +6,7 @@
 /*   By: ccosta-c <ccosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:39:41 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/11/21 14:20:10 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/11/23 11:32:59 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_data
 	t_info		*info;
 	void		*mlx;
 	t_textures	*textures;
+	char		**og_map;
 	char		**map;
 	int			map_height;
 	int			map_width;
@@ -89,8 +90,8 @@ void	convert_string_to_rgb(t_data *data, char **rgb, char place);
 
 /////////////////////debugging.c///////////////////////
 void	print_cub_info(t_data *data);
-void	print_map(t_data *data);
-void	line_print_map(t_data *data);
+void print_map(t_data *data, char **map, int size);
+void line_print_map(t_data *data, int size);
 
 ///////////////////////frees.c/////////////////////////
 int		error_handler(t_data *data, int i);
@@ -111,14 +112,21 @@ void	check_width(t_data *data, char *line);
 /////////////////////get_map.c////////////////////////
 void	get_map(t_data *data);
 void	get_map_array(t_data *data);
-void	write_line(t_data *data, char *line, int j);
-void	check_rest_line(char *array_line, char *line, int *i, int *l);
-void	fill_line(t_data *data, char *array_line, int l);
+void	write_line(t_data *data, char **map, char *line, int j);
+void fill_line(char *array_line, int l, int map_width);
+
+/////////////////////get_map2.c////////////////////////
+void	get_map_4_checks(t_data *data);
+void	write_line_4_checks(t_data *data, char **map, char *line, int j);
 
 /////////////////////verify_map.c//////////////////////
 void	verify_map(t_data	*data);
-void check_borders(t_data *data, char **array);
 void	check_characters(char **array, t_data *data);
 void	verify_player(t_data *data, char letter, int x, int y);
+
+/////////////////////check_border.c////////////////////
+void	check_borders(t_data *data);
+void	flood_fill(char **map, t_data *data, int x, int y);
+
 
 #endif
