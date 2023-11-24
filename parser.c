@@ -6,7 +6,7 @@
 /*   By: ccosta-c <ccosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:40:12 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/11/23 14:22:56 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/11/24 11:49:28 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	parser(t_data *data)
 
 	fd = open(data->info->file_path, O_RDONLY);
 	if (fd == -1)
-		error_handler(data, -1);
+		error_handler_checks(data, -1);
 	get_tex_col(data, fd);
 	close(fd);
 }
@@ -43,7 +43,7 @@ void	get_tex_col(t_data *data, int fd)
 	{
 		free(line);
 		close(fd);
-		error_handler(data, error);
+		error_handler_checks(data, error);
 	}
 	check_textures(data);
 	check_colors(data);
@@ -75,32 +75,30 @@ void	get_textures(t_data *data, char *line)
 
 int	get_colors(t_data	*data, char *line)
 {
-	char	**rgb;
-	char	*colors;
-
 	if (ft_strncmp("F", line, 1) == 0 && data->info->floor_rgb == false)
 	{
-		colors = ft_strtrim(line, "F ");
-		if (colors[0] == '\0' || colors[0] == '\n')
-			return (free(colors), -5);
-		rgb = ft_split(colors, ',');
-		free(colors);
-		if (check_numeric(rgb) == -1)
-			return (free_array(rgb), -7);
-		convert_string_to_rgb(data, rgb, 'F');
-		free_array(rgb);
+		return (get_colors_xtra(data, line, "F ", 'F'));
 	}
 	if (ft_strncmp("C", line, 1) == 0 && data->info->ceiling_rgb == false)
 	{
-		colors = ft_strtrim(line, "C ");
-		if (colors[0] == '\0' || colors[0] == '\n')
-			return (free(colors), -4);
-		rgb = ft_split(colors, ',');
-		free(colors);
-		if (check_numeric(rgb) == -1)
-			return (free_array(rgb), -7);
-		convert_string_to_rgb(data, rgb, 'C');
-		free_array(rgb);
+		return (get_colors_xtra(data, line, "C ", 'C'));
 	}
+	return (0);
+}
+
+int	get_colors_xtra(t_data *data, char *line, char *tile, char place)
+{
+	char	**rgb;
+	char	*colors;
+
+	colors = ft_strtrim(line, tile);
+	if (colors[0] == '\0' || colors[0] == '\n')
+		return (free(colors), -4);
+	rgb = ft_split(colors, ',');
+	free(colors);
+	if (check_numeric(rgb) == -1)
+		return (free_array(rgb), -7);
+	convert_string_to_rgb(data, rgb, place);
+	free_array(rgb);
 	return (0);
 }

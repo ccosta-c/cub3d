@@ -32,7 +32,7 @@ void	get_size(t_data *data)
 	}
 	close (fd);
 	if (data->map_found == 0)
-		error_handler(data, -8);
+		error_handler_checks(data, -8);
 	data->map_found = 0;
 }
 

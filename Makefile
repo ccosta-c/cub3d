@@ -45,13 +45,15 @@ SRC				=	parser.c \
 					debugging.c \
 					utils.c \
 					frees.c \
+					frees2.c \
 					initialize.c \
 					checks.c \
 					check_map.c \
 					get_map.c \
 					get_map2.c \
 					verify_map.c \
-					check_border.c
+					check_border.c \
+					windows.c
 OBJS 			:= $(SRC:.c=.o)
 BONUS			=
 OBJS_BONUS		:= $(BONUS:.c=.o)

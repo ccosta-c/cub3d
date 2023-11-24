@@ -15,20 +15,20 @@
 void	check_colors(t_data *data)
 {
 	if (data->info->ceiling_rgb == false)
-		error_handler(data, -4);
+		error_handler_checks(data, -4);
 	if (data->info->floor_rgb == false)
-		error_handler(data, -5);
+		error_handler_checks(data, -5);
 	if ((data->info->floor_r == -1) || (data->info->floor_g == -1)
 		|| (data->info->floor_b == -1) || (data->info->ceiling_r == -1)
 		|| (data->info->ceiling_g == -1) || (data->info->ceiling_b == -1))
-		error_handler(data, -9);
+		error_handler_checks(data, -9);
 	if ((data->info->floor_r < 0 || data->info->floor_r > 255)
 		|| (data->info->floor_g < 0 || data->info->floor_g > 255)
 		|| (data->info->floor_b < 0 || data->info->floor_b > 255)
 		|| (data->info->ceiling_r < 0 || data->info->ceiling_r > 255)
 		|| (data->info->ceiling_g < 0 || data->info->ceiling_g > 255)
 		|| (data->info->ceiling_b < 0 || data->info->ceiling_b > 255))
-		error_handler(data, -2);
+		error_handler_checks(data, -2);
 }
 
 void	check_extension(char *file, char *extension)
@@ -55,7 +55,7 @@ void	check_textures(t_data *data)
 		printf(RED "Error\nWest texture is missing.\n" NRM);
 	if (!*(data->info->no_tex) || !*(data->info->so_tex)
 		|| !*(data->info->ea_tex) || !*(data->info->we_tex))
-		error_handler(data, 0);
+		error_handler_checks(data, 0);
 }
 
 int	check_numeric(char **rgb)

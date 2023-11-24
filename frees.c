@@ -6,13 +6,13 @@
 /*   By: ccosta-c <ccosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:22:26 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/11/21 14:25:57 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/11/24 12:24:32 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/lib.h"
 
-int	error_handler(t_data *data, int i)
+int	error_handler_checks(t_data *data, int i)
 {
 	if (i == -1)
 		printf(RED "Error\n%s." NRM, strerror(errno));
@@ -36,13 +36,13 @@ int	error_handler(t_data *data, int i)
 		printf(RED "Error\nMore than one player character found.\n" NRM);
 	if (i == -12)
 		printf(RED "Error\nInvalid Map!\n" NRM);
-	free_exit(data);
+	free_exit_checks(data);
 	exit(i);
 }
 
-void	free_exit(t_data *data)
+void	free_exit_checks(t_data *data)
 {
-	free_mlx(data);
+	free_mlx_checks(data);
 	if (data->info->no_tex)
 		free(data->info->no_tex);
 	if (data->info->so_tex)
@@ -61,7 +61,7 @@ void	free_exit(t_data *data)
 	free(data);
 }
 
-void	free_mlx(t_data *data)
+void	free_mlx_checks(t_data *data)
 {
 	if (data->textures->no && data->textures->so && data->textures->ea
 		&& data->textures->we)
@@ -70,6 +70,11 @@ void	free_mlx(t_data *data)
 		mlx_destroy_image(data->mlx, data->textures->so);
 		mlx_destroy_image(data->mlx, data->textures->ea);
 		mlx_destroy_image(data->mlx, data->textures->we);
+		if (data->win)
+		{
+			mlx_destroy_window(data->mlx, data->win);
+			free(data->win);
+		}
 		mlx_destroy_display(data->mlx);
 		free(data->mlx);
 	}

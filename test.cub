@@ -1,4 +1,4 @@
-NO ./textures/test_n_letter.xpm
+NO   ./textures/test_n_letter.xpm  
 SO ./textures/test_s_letter.xpm
 WE ./textures/test_w_letter.xpm
 EA ./textures/test_e_letter.xpm

@@ -16,8 +16,7 @@ void	check_borders(t_data *data)
 {
 	int	x;
 	int	y;
-
-
+	
 	y = 0;
 	data->map_found = 0;
 	get_map_4_checks(data);
@@ -41,7 +40,7 @@ void	flood_fill(char **map, t_data *data, int x, int y)
 	if (map[y][x] == '1' || map[y][x] == '#' || !map[y][x])
 		return ;
 	else if (map[y][x] == ' ')
-		error_handler(data, -12);
+		error_handler_checks(data, -12);
 	else
 	{
 		map[y][x] = '#';

@@ -6,7 +6,7 @@
 /*   By: ccosta-c <ccosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:39:41 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/11/23 11:32:59 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/11/24 15:17:19 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ typedef struct s_info
 	bool	ceiling_rgb;
 	int		player_x;
 	int		player_y;
+	int		player_dir_x;
+	int		player_dir_y;
 }			t_info;
 
 typedef struct s_textures
@@ -64,8 +66,9 @@ typedef struct s_textures
 typedef struct s_data
 {
 	t_info		*info;
-	void		*mlx;
 	t_textures	*textures;
+	void		*win;
+	void		*mlx;
 	char		**og_map;
 	char		**map;
 	int			map_height;
@@ -78,6 +81,7 @@ void	parser(t_data *data);
 void	get_tex_col(t_data *data, int fd);
 void	get_textures(t_data *data, char *line);
 int		get_colors(t_data	*data, char *line);
+int		get_colors_xtra(t_data *data, char *line, char *tile, char place);
 
 ///////////////////////checks.c////////////////////////
 void	check_colors(t_data *data);
@@ -90,12 +94,16 @@ void	convert_string_to_rgb(t_data *data, char **rgb, char place);
 
 /////////////////////debugging.c///////////////////////
 void	print_cub_info(t_data *data);
-void print_map(t_data *data, char **map, int size);
-void line_print_map(t_data *data, int size);
+void	print_map(t_data *data, char **map, int size);
+void	line_print_map(t_data *data, int size);
 
 ///////////////////////frees.c/////////////////////////
-int		error_handler(t_data *data, int i);
-void	free_exit(t_data *data);
+int		error_handler_checks(t_data *data, int i);
+void	free_exit_checks(t_data *data);
+void	free_mlx_checks(t_data *data);
+
+///////////////////////frees2.c/////////////////////////
+int		free_exit(t_data *data);
 void	free_mlx(t_data *data);
 
 /////////////////////initialize.c//////////////////////
@@ -113,20 +121,23 @@ void	check_width(t_data *data, char *line);
 void	get_map(t_data *data);
 void	get_map_array(t_data *data);
 void	write_line(t_data *data, char **map, char *line, int j);
-void fill_line(char *array_line, int l, int map_width);
+void	fill_line(char *array_line, int l, int map_width);
 
-/////////////////////get_map2.c////////////////////////
+/////////////////////get_map2.c///////////////////////
 void	get_map_4_checks(t_data *data);
 void	write_line_4_checks(t_data *data, char **map, char *line, int j);
 
-/////////////////////verify_map.c//////////////////////
+/////////////////////verify_map.c/////////////////////
 void	verify_map(t_data	*data);
 void	check_characters(char **array, t_data *data);
 void	verify_player(t_data *data, char letter, int x, int y);
+void	fill_player_dir(t_data *data, int x, int y);
 
-/////////////////////check_border.c////////////////////
+/////////////////////check_border.c///////////////////
 void	check_borders(t_data *data);
 void	flood_fill(char **map, t_data *data, int x, int y);
 
+////////////////////////windows.c/////////////////////
+void	start_windows(t_data *data);
 
 #endif
