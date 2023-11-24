@@ -3,8 +3,8 @@ SO ./textures/test_s_letter.xpm
 WE ./textures/test_w_letter.xpm
 EA ./textures/test_e_letter.xpm
 
-F      54,78,67
-C   245,45,98           
+F      54,78,87
+C   245,45,31
 
            1111111111111111111111111
            1000000000110000000000001

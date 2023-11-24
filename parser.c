@@ -6,7 +6,7 @@
 /*   By: ccosta-c <ccosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:40:12 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/11/23 14:01:28 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/11/23 14:22:56 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void	get_tex_col(t_data *data, int fd)
 		if (!line)
 			break ;
 		get_textures(data, line);
-		error = get_colors(data, line);
+		if (error == 0)
+			error = get_colors(data, line);
 		free(line);
 	}
 	if (error != 0)
@@ -85,7 +86,7 @@ int	get_colors(t_data	*data, char *line)
 		rgb = ft_split(colors, ',');
 		free(colors);
 		if (check_numeric(rgb) == -1)
-			return (free_array(rgb), -1);
+			return (free_array(rgb), -7);
 		convert_string_to_rgb(data, rgb, 'F');
 		free_array(rgb);
 	}
@@ -97,7 +98,7 @@ int	get_colors(t_data	*data, char *line)
 		rgb = ft_split(colors, ',');
 		free(colors);
 		if (check_numeric(rgb) == -1)
-			return (free_array(rgb), -1);
+			return (free_array(rgb), -7);
 		convert_string_to_rgb(data, rgb, 'C');
 		free_array(rgb);
 	}
