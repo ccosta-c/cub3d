@@ -6,7 +6,7 @@
 /*   By: ccosta-c <ccosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 16:48:56 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/11/24 15:13:19 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/11/30 15:15:48 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_data	*initialize_struct(char *path)
 
 	structure = malloc((sizeof (t_data)));
 	structure->info = initialize_tinfo(path);
+	structure->player = initialize_playerstruct();
 	structure->textures = malloc(sizeof (t_textures));
 	structure->textures->height = 0;
 	structure->textures->width = 0;
@@ -68,15 +69,25 @@ t_info	*initialize_tinfo(char *path)
 	structure->ceiling_r = 0;
 	structure->ceiling_g = 0;
 	structure->ceiling_b = 0;
-	structure->player_x = 0;
-	structure->player_y = 0;
-	structure->player_dir_x = 0;
-	structure->player_dir_y = 0;
 	structure->floor_rgb = false;
 	structure->ceiling_rgb = false;
 	structure->no_tex = NULL;
 	structure->so_tex = NULL;
 	structure->ea_tex = NULL;
 	structure->we_tex = NULL;
+	return (structure);
+}
+
+t_player	*initialize_playerstruct(void)
+{
+	t_player	*structure;
+
+	structure = malloc(sizeof (t_player));
+	structure->position_x = 0;
+	structure->position_y = 0;
+	structure->dir_x = 0;
+	structure->dir_y = 0;
+	structure->plane_x = 0;
+	structure->plane_y = 0;
 	return (structure);
 }
