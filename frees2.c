@@ -21,7 +21,11 @@ int	free_exit(t_data *data)
 	free(data->info->we_tex);
 	free(data->info->file_path);
 	free(data->info);
-	free(data->textures);
+	free(data->img);
+	free(data->no);
+	free(data->so);
+	free(data->we);
+	free(data->ea);
 	free(data->player);
 	free_array(data->map);
 	free_array(data->og_map);
@@ -32,10 +36,15 @@ int	free_exit(t_data *data)
 void	free_mlx(t_data *data)
 {
 	mlx_destroy_window(data->mlx, data->win);
-	mlx_destroy_image(data->mlx, data->textures->no);
-	mlx_destroy_image(data->mlx, data->textures->so);
-	mlx_destroy_image(data->mlx, data->textures->ea);
-	mlx_destroy_image(data->mlx, data->textures->we);
+	mlx_destroy_image(data->mlx, data->no->img);
+	mlx_destroy_image(data->mlx, data->so->img);
+	mlx_destroy_image(data->mlx, data->ea->img);
+	mlx_destroy_image(data->mlx, data->we->img);
+	free(data->img->addr);
+	free(data->no->addr);
+	free(data->so->addr);
+	free(data->we->addr);
+	free(data->ea->addr);
 	mlx_destroy_display(data->mlx);
 	free(data->mlx);
 }

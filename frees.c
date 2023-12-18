@@ -53,7 +53,11 @@ void	free_exit_checks(t_data *data)
 		free(data->info->we_tex);
 	free(data->info->file_path);
 	free(data->info);
-	free(data->textures);
+	free(data->img);
+	free(data->no);
+	free(data->so);
+	free(data->we);
+	free(data->ea);
 	free(data->player);
 	if (data->map)
 		free_array(data->map);
@@ -64,13 +68,13 @@ void	free_exit_checks(t_data *data)
 
 void	free_mlx_checks(t_data *data)
 {
-	if (data->textures->no && data->textures->so && data->textures->ea
-		&& data->textures->we)
+	if (data->no->img && data->so->img && data->ea->img
+		&& data->we->img)
 	{
-		mlx_destroy_image(data->mlx, data->textures->no);
-		mlx_destroy_image(data->mlx, data->textures->so);
-		mlx_destroy_image(data->mlx, data->textures->ea);
-		mlx_destroy_image(data->mlx, data->textures->we);
+		mlx_destroy_image(data->mlx, data->no->img);
+		mlx_destroy_image(data->mlx, data->so->img);
+		mlx_destroy_image(data->mlx, data->ea->img);
+		mlx_destroy_image(data->mlx, data->we->img);
 		if (data->win)
 		{
 			mlx_destroy_window(data->mlx, data->win);
@@ -79,4 +83,9 @@ void	free_mlx_checks(t_data *data)
 		mlx_destroy_display(data->mlx);
 		free(data->mlx);
 	}
+	free(data->img->addr);
+	free(data->no->addr);
+	free(data->so->addr);
+	free(data->we->addr);
+	free(data->ea->addr);
 }

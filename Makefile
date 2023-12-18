@@ -47,6 +47,7 @@ SRC				=	parser.c \
 					frees.c \
 					frees2.c \
 					initialize.c \
+					initialize2.c \
 					checks.c \
 					check_map.c \
 					get_map.c \

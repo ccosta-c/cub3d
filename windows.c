@@ -15,6 +15,7 @@
 void	start_windows(t_data *data)
 {
 	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "cub3D");
+	put_ceiling_floor(data);
 	mlx_hook(data->win, DestroyNotify, StructureNotifyMask, &free_exit, data);
 	mlx_loop(data->mlx);
 }

@@ -25,6 +25,7 @@
 # include <errno.h>
 # include <string.h>
 # include <stdbool.h>
+# include <math.h>
 
 # define RED "\033[1;31m"
 # define NRM "\033[0;37m"
@@ -45,10 +46,12 @@ typedef struct s_info
 	int		floor_r;
 	int		floor_g;
 	int		floor_b;
+	int		f_color;
 	bool	floor_rgb;
 	int		ceiling_r;
 	int		ceiling_g;
 	int		ceiling_b;
+	int		c_color;
 	bool	ceiling_rgb;
 }			t_info;
 
@@ -56,10 +59,11 @@ typedef struct s_textures
 {
 	int		height;
 	int		width;
-	void	*no;
-	void	*so;
-	void	*we;
-	void	*ea;
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_length;
+	int		endian;
 }			t_textures;
 
 typedef struct s_player
@@ -75,7 +79,12 @@ typedef struct s_player
 typedef struct s_data
 {
 	t_info		*info;
-	t_textures	*textures;
+	//t_textures	*textures;
+	t_textures	*img;
+	t_textures	*no;
+	t_textures	*so;
+	t_textures	*we;
+	t_textures	*ea;
 	t_player	*player;
 	void		*win;
 	void		*mlx;
@@ -123,6 +132,11 @@ void		open_images(t_data *data);
 t_info		*initialize_tinfo(char *path);
 t_player	*initialize_playerstruct(void);
 
+/////////////////////initialize2.c/////////////////////
+void		init_texture_stuff(t_data *data);
+void		init_texture_stuff2(t_data *data);
+void		open_addr(t_data *data);
+
 /////////////////////check_map.c//////////////////////
 void		get_size(t_data *data);
 int			check_line(t_data *data, char *line);
@@ -154,5 +168,7 @@ void		start_windows(t_data *data);
 
 ///////////////////////rendering.c////////////////////
 void		put_ceiling_floor(t_data *data);
+void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void		init_color(t_data *data);
 
 #endif
