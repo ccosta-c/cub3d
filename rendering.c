@@ -25,9 +25,9 @@ void	put_ceiling_floor(t_data *data)
 		while (y < HEIGHT)
 		{
 			if (y <= (HEIGHT / 2))
-				my_mlx_pixel_put(data, x, y, data->info->f_color);
-			if (y > (HEIGHT / 2))
 				my_mlx_pixel_put(data, x, y, data->info->c_color);
+			if (y > (HEIGHT / 2))
+				my_mlx_pixel_put(data, x, y, data->info->f_color);
 			y++;
 		}
 		x++;
