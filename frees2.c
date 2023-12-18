@@ -6,7 +6,7 @@
 /*   By: ccosta-c <ccosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:29:04 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/11/24 12:54:39 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/11/30 15:46:20 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	free_exit(t_data *data)
 	free(data->info->file_path);
 	free(data->info);
 	free(data->textures);
+	free(data->player);
 	free_array(data->map);
 	free_array(data->og_map);
 	free(data);

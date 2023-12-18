@@ -6,7 +6,7 @@
 /*   By: ccosta-c <ccosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:39:41 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/11/30 15:37:19 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/11/30 16:01:05 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@
 # define BLD "\033[1;37m"
 # define GRN "\033[1;32m"
 # define GRY "\033[38;2;150;150;150m"
+
+# define HEIGHT 1000
+# define WIDTH 1900
 
 typedef struct s_info
 {
@@ -148,5 +151,8 @@ void		flood_fill(char **map, t_data *data, int x, int y);
 
 ////////////////////////windows.c/////////////////////
 void		start_windows(t_data *data);
+
+///////////////////////rendering.c////////////////////
+void		put_ceiling_floor(t_data *data);
 
 #endif

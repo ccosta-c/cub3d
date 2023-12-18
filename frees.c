@@ -54,6 +54,7 @@ void	free_exit_checks(t_data *data)
 	free(data->info->file_path);
 	free(data->info);
 	free(data->textures);
+	free(data->player);
 	if (data->map)
 		free_array(data->map);
 	if (data->og_map)

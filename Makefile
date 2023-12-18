@@ -53,7 +53,8 @@ SRC				=	parser.c \
 					get_map2.c \
 					verify_map.c \
 					check_border.c \
-					windows.c
+					windows.c \
+					rendering.c
 OBJS 			:= $(SRC:.c=.o)
 BONUS			=
 OBJS_BONUS		:= $(BONUS:.c=.o)

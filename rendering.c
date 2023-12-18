@@ -1,20 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   windows.c                                          :+:      :+:    :+:   */
+/*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccosta-c <ccosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/24 11:36:07 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/11/30 16:00:29 by ccosta-c         ###   ########.fr       */
+/*   Created: 2023/11/30 15:47:34 by ccosta-c          #+#    #+#             */
+/*   Updated: 2023/11/30 16:02:57 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/lib.h"
 
-void	start_windows(t_data *data)
+void	put_ceiling_floor(t_data *data)
 {
-	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "cub3D");
-	mlx_hook(data->win, DestroyNotify, StructureNotifyMask, &free_exit, data);
-	mlx_loop(data->mlx);
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (y < HEIGHT)
+	{
+		while (x < WIDTH)
+		{
+			if (y < HEIGHT/2)
+				mlx_pixel_put(data->mlx, data->win, x, y, data->)
+		}
+
+	}
 }
