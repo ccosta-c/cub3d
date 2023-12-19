@@ -71,6 +71,7 @@ void	free_mlx_checks(t_data *data)
 	if (data->no->img && data->so->img && data->ea->img
 		&& data->we->img)
 	{
+		mlx_destroy_image(data->mlx, data->img->img);
 		mlx_destroy_image(data->mlx, data->no->img);
 		mlx_destroy_image(data->mlx, data->so->img);
 		mlx_destroy_image(data->mlx, data->ea->img);
@@ -83,9 +84,4 @@ void	free_mlx_checks(t_data *data)
 		mlx_destroy_display(data->mlx);
 		free(data->mlx);
 	}
-	free(data->img->addr);
-	free(data->no->addr);
-	free(data->so->addr);
-	free(data->we->addr);
-	free(data->ea->addr);
 }

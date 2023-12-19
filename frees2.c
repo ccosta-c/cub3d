@@ -6,7 +6,7 @@
 /*   By: ccosta-c <ccosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:29:04 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/11/30 15:46:20 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/12/19 12:14:13 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,12 @@ int	free_exit(t_data *data)
 
 void	free_mlx(t_data *data)
 {
-	mlx_destroy_window(data->mlx, data->win);
+	mlx_destroy_image(data->mlx, data->img->img);
 	mlx_destroy_image(data->mlx, data->no->img);
 	mlx_destroy_image(data->mlx, data->so->img);
 	mlx_destroy_image(data->mlx, data->ea->img);
 	mlx_destroy_image(data->mlx, data->we->img);
-	free(data->img->addr);
-	free(data->no->addr);
-	free(data->so->addr);
-	free(data->we->addr);
-	free(data->ea->addr);
+	mlx_destroy_window(data->mlx, data->win);
 	mlx_destroy_display(data->mlx);
 	free(data->mlx);
 }

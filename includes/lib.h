@@ -79,7 +79,6 @@ typedef struct s_player
 typedef struct s_data
 {
 	t_info		*info;
-	//t_textures	*textures;
 	t_textures	*img;
 	t_textures	*no;
 	t_textures	*so;
