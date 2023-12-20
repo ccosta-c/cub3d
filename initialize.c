@@ -62,6 +62,10 @@ t_data	*initialize_struct(char *path)
 	structure->draw_end = 0;
 	structure->lineheight = 0;
 	structure->wall_x = 0;
+	structure->tex_x = 0;
+	structure->tex_y = 0;
+	structure->text_step = 0;
+	structure->text_pos = 0;
 	return (structure);
 }
 

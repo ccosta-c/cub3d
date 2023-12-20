@@ -33,8 +33,10 @@
 # define GRN "\033[1;32m"
 # define GRY "\033[38;2;150;150;150m"
 
-# define HEIGHT 1000
-# define WIDTH 1900
+# define HEIGHT 600
+# define WIDTH 800
+# define TEX_WIDTH 64
+# define TEX_WIDTH 64
 
 typedef struct s_info
 {
@@ -107,6 +109,10 @@ typedef struct s_data
 	int			draw_end;
 	int			lineheight;
 	double		wall_x;
+	int			tex_x;
+	int			tex_y;
+	double		text_step;
+	double		text_pos;
 }				t_data;
 
 ///////////////////////parser.c////////////////////////
@@ -194,6 +200,8 @@ void		get_wall_h(t_data *data);
 void		get_tex_wall(t_data *data);
 
 ///////////////////////draw_wall.c////////////////////
-void		draw_wall(t_data *data, int i)
+void		draw_wall(t_data *data, int i);
+void		get_tex_x(t_data *data);
+int		ft_get_pixel(t_data *data, int x, int y);
 
 #endif
