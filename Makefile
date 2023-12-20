@@ -55,7 +55,9 @@ SRC				=	parser.c \
 					verify_map.c \
 					check_border.c \
 					windows.c \
-					rendering.c
+					rendering.c \
+					raycaster.c \
+					draw_wall.c
 OBJS 			:= $(SRC:.c=.o)
 BONUS			=
 OBJS_BONUS		:= $(BONUS:.c=.o)

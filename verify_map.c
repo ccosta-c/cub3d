@@ -44,10 +44,10 @@ void	verify_player(t_data *data, char letter, int x, int y)
 {
 	if (letter == 'N' || letter == 'S' || letter == 'W' || letter == 'E')
 	{
-		if (data->position_x != 0 || data->position_y != 0)
+		if (data->p_x != 0 || data->p_y != 0)
 			error_handler_checks(data, -11);
-		data->position_x = x;
-		data->position_y = y;
+		data->p_x = x;
+		data->p_y = y;
 		if (letter == 'N')
 			fill_player_dir(data, 'N');
 		if (letter == 'S')

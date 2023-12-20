@@ -70,6 +70,7 @@ typedef struct s_data
 {
 	t_info		*info;
 	t_textures	*img;
+	t_textures	*aux;
 	t_textures	*no;
 	t_textures	*so;
 	t_textures	*we;
@@ -81,12 +82,31 @@ typedef struct s_data
 	int			map_height;
 	int			map_width;
 	bool		map_found;
-	float		position_x;
-	float		position_y;
+	float		p_x;
+	float		p_y;
 	float		dir_x;
 	float		dir_y;
 	float		plane_x;
 	float		plane_y;
+	double		camera_x;
+	double		raydir_x;
+	double		raydir_y;
+	double		side_dist_x;
+	double		side_dist_y;
+	double		delta_dist_x;
+	double		delta_dist_y;
+	int			i;
+	int			mapx;
+	int			mapy;
+	double		pwalldist;
+	int			stepx;
+	int			stepy;
+	int			hit;
+	int			side;
+	int			draw_start;
+	int			draw_end;
+	int			lineheight;
+	double		wall_x;
 }				t_data;
 
 ///////////////////////parser.c////////////////////////
@@ -158,10 +178,22 @@ void		flood_fill(char **map, t_data *data, int x, int y);
 
 ////////////////////////windows.c/////////////////////
 void		start_windows(t_data *data);
+void		draw_raycast(t_data *data);
+int		game_loop(t_data *data);
 
 ///////////////////////rendering.c////////////////////
 void		put_ceiling_floor(t_data *data);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void		init_color(t_data *data);
+
+///////////////////////raycaster.c////////////////////
+void		ray_calculations(t_data *data);
+void		get_step_sidedist(t_data *data);
+void		get_hit(t_data *data);
+void		get_wall_h(t_data *data);
+void		get_tex_wall(t_data *data);
+
+///////////////////////draw_wall.c////////////////////
+void		draw_wall(t_data *data, int i)
 
 #endif
