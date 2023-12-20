@@ -66,16 +66,6 @@ typedef struct s_textures
 	int		endian;
 }			t_textures;
 
-typedef struct s_player
-{
-	float	position_x;
-	float	position_y;
-	float	dir_x;
-	float	dir_y;
-	float	plane_x;
-	float	plane_y;
-}				t_player;
-
 typedef struct s_data
 {
 	t_info		*info;
@@ -84,7 +74,6 @@ typedef struct s_data
 	t_textures	*so;
 	t_textures	*we;
 	t_textures	*ea;
-	t_player	*player;
 	void		*win;
 	void		*mlx;
 	char		**og_map;
@@ -92,6 +81,12 @@ typedef struct s_data
 	int			map_height;
 	int			map_width;
 	bool		map_found;
+	float		position_x;
+	float		position_y;
+	float		dir_x;
+	float		dir_y;
+	float		plane_x;
+	float		plane_y;
 }				t_data;
 
 ///////////////////////parser.c////////////////////////
@@ -129,7 +124,6 @@ t_data		*initialize_struct(char *path);
 void		start_mlx(t_data *data);
 void		open_images(t_data *data);
 t_info		*initialize_tinfo(char *path);
-t_player	*initialize_playerstruct(void);
 
 /////////////////////initialize2.c/////////////////////
 void		init_texture_stuff(t_data *data);

@@ -44,10 +44,10 @@ void	verify_player(t_data *data, char letter, int x, int y)
 {
 	if (letter == 'N' || letter == 'S' || letter == 'W' || letter == 'E')
 	{
-		if (data->player->position_x != 0 || data->player->position_y != 0)
+		if (data->position_x != 0 || data->position_y != 0)
 			error_handler_checks(data, -11);
-		data->player->position_x = x;
-		data->player->position_y = y;
+		data->position_x = x;
+		data->position_y = y;
 		if (letter == 'N')
 			fill_player_dir(data, 'N');
 		if (letter == 'S')
@@ -63,17 +63,17 @@ void	fill_player_dir(t_data *data, char letter)
 {
 	if (letter == 'N')
 	{
-		data->player->dir_x = 0;
-		data->player->dir_y = -1;
-		data->player->plane_x = 0.66;
-		data->player->plane_y = 0;
+		data->dir_x = 0;
+		data->dir_y = -1;
+		data->plane_x = 0.66;
+		data->plane_y = 0;
 	}
 	if (letter == 'S')
 	{
-		data->player->dir_x = 0;
-		data->player->dir_y = 1;
-		data->player->plane_x = -0.66;
-		data->player->plane_y = 0;
+		data->dir_x = 0;
+		data->dir_y = 1;
+		data->plane_x = -0.66;
+		data->plane_y = 0;
 	}
 	fill_player_dir2(data, letter);
 }
@@ -82,16 +82,16 @@ void	fill_player_dir2(t_data *data, char letter)
 {
 	if (letter == 'W')
 	{
-		data->player->dir_x = -1;
-		data->player->dir_y = 0;
-		data->player->plane_x = 0;
-		data->player->plane_y = -0.66;
+		data->dir_x = -1;
+		data->dir_y = 0;
+		data->plane_x = 0;
+		data->plane_y = -0.66;
 	}
 	if (letter == 'E')
 	{
-		data->player->dir_x = 1;
-		data->player->dir_y = 0;
-		data->player->plane_x = 0;
-		data->player->plane_y = 0.66;
+		data->dir_x = 1;
+		data->dir_y = 0;
+		data->plane_x = 0;
+		data->plane_y = 0.66;
 	}
 }

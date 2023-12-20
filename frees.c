@@ -58,7 +58,6 @@ void	free_exit_checks(t_data *data)
 	free(data->so);
 	free(data->we);
 	free(data->ea);
-	free(data->player);
 	if (data->map)
 		free_array(data->map);
 	if (data->og_map)

@@ -26,7 +26,6 @@ int	free_exit(t_data *data)
 	free(data->so);
 	free(data->we);
 	free(data->ea);
-	free(data->player);
 	free_array(data->map);
 	free_array(data->og_map);
 	free(data);

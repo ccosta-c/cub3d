@@ -20,14 +20,11 @@ t_data	*initialize_struct(char *path)
 
 	structure = malloc((sizeof (t_data)));
 	structure->info = initialize_tinfo(path);
-	structure->player = initialize_playerstruct();
 	structure->img = malloc(sizeof (t_textures));
 	structure->no = malloc(sizeof (t_textures));
 	structure->so = malloc(sizeof (t_textures));
 	structure->we = malloc(sizeof (t_textures));
 	structure->ea = malloc(sizeof (t_textures));
-	//structure->textures->height = 0;
-	//structure->textures->width = 0;
 	structure->map_height = 0;
 	structure->map_width = 0;
 	structure->map_found = false;
@@ -40,6 +37,12 @@ t_data	*initialize_struct(char *path)
 	init_texture_stuff(structure);
 	structure->og_map = NULL;
 	structure->map = NULL;
+	structure->position_x = 0;
+	structure->position_y = 0;
+	structure->dir_x = 0;
+	structure->dir_y = 0;
+	structure->plane_x = 0;
+	structure->plane_y = 0;
 	return (structure);
 }
 
@@ -79,26 +82,12 @@ t_info	*initialize_tinfo(char *path)
 	structure->ceiling_g = 0;
 	structure->ceiling_b = 0;
 	structure->c_color = 0;
-	structure->f_color= 0;
+	structure->f_color = 0;
 	structure->floor_rgb = false;
 	structure->ceiling_rgb = false;
 	structure->no_tex = NULL;
 	structure->so_tex = NULL;
 	structure->ea_tex = NULL;
 	structure->we_tex = NULL;
-	return (structure);
-}
-
-t_player	*initialize_playerstruct(void)
-{
-	t_player	*structure;
-
-	structure = malloc(sizeof (t_player));
-	structure->position_x = 0;
-	structure->position_y = 0;
-	structure->dir_x = 0;
-	structure->dir_y = 0;
-	structure->plane_x = 0;
-	structure->plane_y = 0;
 	return (structure);
 }
