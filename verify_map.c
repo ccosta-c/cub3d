@@ -46,8 +46,8 @@ void	verify_player(t_data *data, char letter, int x, int y)
 	{
 		if (data->p_x != 0 || data->p_y != 0)
 			error_handler_checks(data, -11);
-		data->p_x = x;
-		data->p_y = y;
+		data->p_x = x + 0.5;
+		data->p_y = y + 0.5;
 		if (letter == 'N')
 			fill_player_dir(data, 'N');
 		if (letter == 'S')
